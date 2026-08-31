@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,454 +8,895 @@
   <title>Demande d'accompagnement — Vérification de votre situation</title>
 
   <style>
+
     :root {
       --ink: #1f2b24;
       --ink-soft: #4a5750;
       --paper: #f7f6f1;
       --card: #ffffff;
+
       --sage: #3c5a48;
       --sage-deep: #2a4234;
+
       --line: #d9d5c9;
+
       --warn-bg: #fbf3e3;
       --warn-line: #e0c98f;
+
       --error: #a3372c;
-      --success: #2f6b45;
+
       --radius: 10px;
     }
+
 
     * {
       box-sizing: border-box;
     }
 
+
     html {
       scroll-behavior: smooth;
     }
 
+
     body {
       margin: 0;
-      font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+
+      font-family:
+        "Iowan Old Style",
+        "Palatino Linotype",
+        Georgia,
+        serif;
+
       background: var(--paper);
       color: var(--ink);
+
       line-height: 1.55;
     }
 
-    .wrap {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 0 20px 80px;
-    }
 
     /* =========================
-       HERO
+       CONTENEUR
+    ========================== */
+
+    .wrap {
+      max-width: 720px;
+
+      margin: 0 auto;
+
+      padding:
+        0
+        20px
+        80px;
+    }
+
+
+    /* =========================
+       HEADER
     ========================== */
 
     header.hero {
-      background: var(--sage-deep);
+
+      background:
+        var(--sage-deep);
+
       color: #f1f0e6;
-      padding: 56px 20px 40px;
+
+      padding:
+        56px
+        20px
+        40px;
+
       margin-bottom: -28px;
     }
 
+
     header.hero .hero-inner {
+
       max-width: 720px;
+
       margin: 0 auto;
     }
 
+
     .eyebrow {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
       text-transform: uppercase;
+
       letter-spacing: 0.14em;
+
       font-size: 12px;
+
       color: #b9cdbd;
-      margin: 0 0 14px;
+
+      margin:
+        0
+        0
+        14px;
     }
 
+
     header.hero h1 {
-      font-size: clamp(28px, 5vw, 38px);
+
+      font-size:
+        clamp(
+          28px,
+          5vw,
+          38px
+        );
+
       line-height: 1.15;
-      margin: 0 0 16px;
+
+      margin:
+        0
+        0
+        16px;
+
       font-weight: 600;
     }
 
+
     header.hero p {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
       color: #d8ddd3;
+
       font-size: 15.5px;
+
       max-width: 54ch;
+
       margin: 0;
     }
 
+
     /* =========================
-       MAIN CARD
+       CARTE PRINCIPALE
     ========================== */
 
     main {
+
       background: var(--card);
+
       border-radius: var(--radius);
+
       box-shadow:
-        0 1px 3px rgba(0, 0, 0, 0.06),
-        0 12px 32px rgba(30, 40, 30, 0.08);
-      padding: 8px 28px 40px;
+        0 1px 3px rgba(0,0,0,0.06),
+        0 12px 32px rgba(30,40,30,0.08);
+
+      padding:
+        8px
+        28px
+        40px;
+
       position: relative;
+
       z-index: 1;
     }
+
 
     /* =========================
        NOTICES
     ========================== */
 
     .notice {
+
       display: flex;
+
       gap: 12px;
+
       align-items: flex-start;
+
       background: var(--warn-bg);
-      border: 1px solid var(--warn-line);
+
+      border:
+        1px
+        solid
+        var(--warn-line);
+
       border-radius: 8px;
-      padding: 16px 18px;
-      margin: 28px 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+      padding:
+        16px
+        18px;
+
+      margin:
+        28px
+        0;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
       font-size: 14.5px;
+
       color: #5c4a1f;
     }
 
+
     .notice.confidential {
+
       background: #eef2ea;
+
       border-color: #c8d4c0;
+
       color: var(--sage-deep);
     }
 
+
     .notice strong {
+
       display: block;
+
       margin-bottom: 3px;
     }
 
+
     /* =========================
-       PROGRESS
+       PROGRESSION
     ========================== */
 
     .progress-track {
+
       display: flex;
+
       align-items: center;
+
       gap: 6px;
-      margin: 30px 0 4px;
+
+      margin:
+        30px
+        0
+        4px;
     }
 
+
     .progress-seg {
+
       height: 4px;
+
       flex: 1;
+
       background: var(--line);
+
       border-radius: 2px;
+
       overflow: hidden;
     }
 
+
     .progress-seg .fill {
+
       height: 100%;
+
       width: 0%;
+
       background: var(--sage);
-      transition: width 0.25s ease;
+
+      transition:
+        width
+        0.25s
+        ease;
     }
+
 
     .progress-seg.done .fill,
     .progress-seg.active .fill {
+
       width: 100%;
     }
 
+
     .progress-caption {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
       font-size: 12.5px;
+
       color: var(--ink-soft);
+
       margin-bottom: 22px;
     }
 
+
     /* =========================
-       STEPS
+       ÉTAPES
     ========================== */
 
     section.block {
+
       margin-top: 44px;
+
       padding-top: 28px;
-      border-top: 1px solid var(--line);
+
+      border-top:
+        1px
+        solid
+        var(--line);
+
       display: none;
     }
 
+
     section.block.active {
+
       display: block;
     }
 
+
     section.block:first-of-type {
+
       border-top: none;
+
       margin-top: 28px;
+
       padding-top: 0;
     }
 
+
     .step-label {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
       font-size: 12.5px;
+
       text-transform: uppercase;
+
       letter-spacing: 0.1em;
+
       color: var(--sage);
+
       font-weight: 700;
-      margin: 0 0 6px;
+
+      margin:
+        0
+        0
+        6px;
     }
 
+
     section.block h2 {
+
       font-size: 22px;
-      margin: 0 0 18px;
+
+      margin:
+        0
+        0
+        18px;
+
       font-weight: 600;
+
       color: var(--ink);
     }
 
+
     /* =========================
-       FIELDS
+       CHAMPS
     ========================== */
 
     .field {
+
       margin-bottom: 22px;
     }
 
+
     label {
+
       display: block;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
       font-weight: 600;
+
       font-size: 15px;
+
       margin-bottom: 7px;
+
       color: var(--ink);
     }
 
+
     label .req {
+
       color: var(--error);
+
       font-weight: 400;
+
       margin-left: 2px;
     }
 
+
     .hint {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
       font-size: 13px;
+
       color: var(--ink-soft);
-      margin: -4px 0 8px;
+
+      margin:
+        -4px
+        0
+        8px;
     }
+
 
     input[type="text"],
     input[type="email"],
     input[type="tel"],
     input[type="number"],
     select {
+
       width: 100%;
-      padding: 12px 14px;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+      padding:
+        12px
+        14px;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
       font-size: 15.5px;
-      border: 1px solid #c7c2b3;
+
+      border:
+        1px
+        solid
+        #c7c2b3;
+
       border-radius: 8px;
+
       background: #fffefb;
+
       color: var(--ink);
+
       outline: none;
+
       transition:
-        border-color 0.15s ease,
-        box-shadow 0.15s ease;
+        border-color
+        0.15s
+        ease,
+        box-shadow
+        0.15s
+        ease;
     }
+
 
     input:focus,
     select:focus,
     .file-input:focus-within {
+
       border-color: var(--sage);
-      box-shadow: 0 0 0 3px rgba(60, 90, 72, 0.15);
+
+      box-shadow:
+        0
+        0
+        0
+        3px
+        rgba(60,90,72,0.15);
     }
 
+
     /* =========================
-       RADIO
+       RADIOS
     ========================== */
 
     .radio-group {
+
       display: flex;
+
       flex-direction: column;
+
       gap: 8px;
     }
 
+
     .radio-option {
+
       display: flex;
+
       align-items: center;
+
       gap: 10px;
-      padding: 12px 14px;
-      border: 1px solid #c7c2b3;
+
+      padding:
+        12px
+        14px;
+
+      border:
+        1px
+        solid
+        #c7c2b3;
+
       border-radius: 8px;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
       font-size: 15px;
+
       cursor: pointer;
+
       background: #fffefb;
+
       transition:
-        border-color 0.15s ease,
-        background 0.15s ease;
+        border-color
+        0.15s
+        ease,
+        background
+        0.15s
+        ease;
     }
 
+
     .radio-option:hover {
+
       border-color: var(--sage);
     }
 
+
     .radio-option input {
+
       accent-color: var(--sage);
+
       width: 17px;
+
       height: 17px;
+
       flex-shrink: 0;
     }
 
+
     /* =========================
-       FILE INPUT
+       FICHIERS
     ========================== */
 
     .file-input {
-      border: 1.5px dashed #b8b2a0;
+
+      border:
+        1.5px
+        dashed
+        #b8b2a0;
+
       border-radius: 8px;
-      padding: 22px 16px;
+
+      padding:
+        22px
+        16px;
+
       text-align: center;
+
       background: #fbfaf6;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
     }
 
+
     .file-input input[type="file"] {
+
       display: block;
-      margin: 10px auto 0;
+
+      margin:
+        10px
+        auto
+        0;
+
       font-size: 13.5px;
+
       max-width: 100%;
     }
 
+
     .file-input .flabel {
+
       font-size: 14px;
+
       color: var(--ink-soft);
     }
+
 
     /* =========================
        NAVIGATION
     ========================== */
 
     .step-nav {
+
       display: flex;
+
       gap: 12px;
+
       margin-top: 34px;
     }
 
+
     button {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
       font-size: 16px;
+
       font-weight: 600;
+
       border-radius: 8px;
+
       padding: 15px;
+
       cursor: pointer;
+
       border: none;
+
       transition:
-        background 0.15s ease,
-        opacity 0.15s ease,
-        transform 0.1s ease;
+        background
+        0.15s
+        ease,
+        opacity
+        0.15s
+        ease,
+        transform
+        0.1s
+        ease;
     }
 
+
     button:active {
-      transform: translateY(1px);
+
+      transform:
+        translateY(1px);
     }
+
+
+    button:disabled {
+
+      opacity: 0.65;
+
+      cursor: wait;
+    }
+
 
     .btn-next,
     button[type="submit"] {
+
       flex: 1;
+
       background: var(--sage-deep);
+
       color: #fff;
     }
 
+
     .btn-next:hover,
     button[type="submit"]:hover {
+
       background: var(--sage);
     }
 
+
     .btn-back {
+
       background: transparent;
+
       color: var(--ink-soft);
-      border: 1px solid var(--line);
-      padding: 15px 20px;
+
+      border:
+        1px
+        solid
+        var(--line);
+
+      padding:
+        15px
+        20px;
     }
 
+
     .btn-back:hover {
+
       background: #f1efe8;
     }
 
+
     /* =========================
-       ERROR
+       ERREUR
     ========================== */
 
     .error-msg {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
       font-size: 13.5px;
+
       color: var(--error);
-      margin-top: -10px;
-      margin-bottom: 20px;
+
+      margin:
+        -10px
+        0
+        20px;
+
       display: none;
     }
 
+
     .error-msg.show {
+
       display: block;
     }
+
+
+    /* =========================
+       MESSAGE FICHIERS
+    ========================== */
+
+    .file-status {
+
+      margin-top: 8px;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      font-size: 12.5px;
+
+      color: var(--ink-soft);
+
+      text-align: center;
+    }
+
 
     /* =========================
        FOOTER
     ========================== */
 
     footer {
+
       text-align: center;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
       font-size: 12.5px;
+
       color: var(--ink-soft);
+
       margin-top: 30px;
     }
+
 
     /* =========================
        MOBILE
     ========================== */
 
     @media (max-width: 480px) {
+
       .wrap {
-        padding: 0 12px 60px;
+
+        padding:
+          0
+          12px
+          60px;
       }
+
 
       main {
-        padding: 4px 18px 32px;
+
+        padding:
+          4px
+          18px
+          32px;
       }
+
 
       header.hero {
-        padding: 44px 16px 36px;
+
+        padding:
+          44px
+          16px
+          36px;
       }
 
+
       .notice {
+
         font-size: 13.5px;
+
         padding: 14px;
       }
 
+
       section.block h2 {
+
         font-size: 21px;
       }
 
+
       .step-nav {
+
         gap: 8px;
       }
 
+
       .btn-back {
-        padding: 15px 14px;
+
+        padding:
+          15px
+          14px;
       }
+
     }
+
   </style>
+
 </head>
+
 
 <body>
 
-  <!-- =========================
-       HERO
-  ========================== -->
+
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
 
   <header class="hero">
+
     <div class="hero-inner">
 
       <p class="eyebrow">
         Demande d'accompagnement
       </p>
 
+
       <h1>
         Vérification de votre situation
       </h1>
+
 
       <p>
         Merci de prendre quelques minutes pour compléter ce formulaire.
@@ -463,36 +905,42 @@
       </p>
 
     </div>
+
   </header>
+
 
 
   <div class="wrap">
 
     <main>
 
-      <!-- =========================
+
+      <!-- =================================================
            CONFIDENTIALITÉ
-      ========================== -->
+      ================================================== -->
 
       <div class="notice confidential">
 
         <span>🔒</span>
 
         <div>
+
           <strong>
             Vos informations sont traitées de manière confidentielle.
           </strong>
 
           Merci de ne transmettre que les informations et documents
           strictement nécessaires à votre démarche.
+
         </div>
 
       </div>
 
 
-      <!-- =========================
+
+      <!-- =================================================
            AVERTISSEMENT
-      ========================== -->
+      ================================================== -->
 
       <div class="notice">
 
@@ -512,15 +960,17 @@
       </div>
 
 
-      <!-- =========================
+
+      <!-- =================================================
            PROGRESSION
-      ========================== -->
+      ================================================== -->
 
       <div
         class="progress-track"
         id="progressTrack"
         aria-label="Progression du formulaire"
       ></div>
+
 
       <p
         class="progress-caption"
@@ -531,9 +981,10 @@
       </p>
 
 
-      <!-- =========================
-           NETLIFY FORM
-      ========================== -->
+
+      <!-- =================================================
+           FORMULAIRE NETLIFY
+      ================================================== -->
 
       <form
         name="demande-accompagnement"
@@ -545,30 +996,52 @@
         id="mainForm"
       >
 
+
         <!-- Identification Netlify -->
+
         <input
           type="hidden"
           name="form-name"
           value="demande-accompagnement"
         >
 
-        <!-- Anti-spam Netlify -->
-        <p style="display:none;">
+
+        <!-- Honeypot anti-spam -->
+
+        <div
+          class="bot-field"
+          aria-hidden="true"
+          style="
+            position:absolute;
+            overflow:hidden;
+            clip:rect(0 0 0 0);
+            height:1px;
+            width:1px;
+            margin:-1px;
+            padding:0;
+            border:0;
+          "
+        >
+
           <label>
             Ne pas remplir ce champ :
+
             <input
               name="bot-field"
               type="text"
               tabindex="-1"
               autocomplete="off"
             >
+
           </label>
-        </p>
+
+        </div>
 
 
-        <!-- ==================================================
-             ÉTAPE 1 — INFORMATIONS PERSONNELLES
-        =================================================== -->
+
+        <!-- =================================================
+             ÉTAPE 1
+        ================================================== -->
 
         <section
           class="block active"
@@ -580,9 +1053,11 @@
             Étape 1
           </p>
 
+
           <h2>
             Vos informations personnelles
           </h2>
+
 
 
           <div class="field">
@@ -602,6 +1077,7 @@
           </div>
 
 
+
           <div class="field">
 
             <label for="prenoms">
@@ -617,6 +1093,7 @@
             >
 
           </div>
+
 
 
           <div class="field">
@@ -636,6 +1113,7 @@
           </div>
 
 
+
           <div class="field">
 
             <label for="telephone">
@@ -653,6 +1131,7 @@
           </div>
 
 
+
           <div class="field">
 
             <label for="ville">
@@ -668,6 +1147,7 @@
             >
 
           </div>
+
 
 
           <div class="field">
@@ -688,6 +1168,7 @@
           </div>
 
 
+
           <p
             class="error-msg"
             role="alert"
@@ -695,6 +1176,7 @@
             Merci de compléter tous les champs obligatoires avant de
             continuer.
           </p>
+
 
 
           <div class="step-nav">
@@ -712,9 +1194,10 @@
         </section>
 
 
-        <!-- ==================================================
-             ÉTAPE 2 — SITUATION
-        =================================================== -->
+
+        <!-- =================================================
+             ÉTAPE 2
+        ================================================== -->
 
         <section
           class="block"
@@ -726,9 +1209,11 @@
             Étape 2
           </p>
 
+
           <h2>
             Votre situation
           </h2>
+
 
 
           <div class="field">
@@ -738,39 +1223,52 @@
               sociale ?<span class="req">*</span>
             </label>
 
+
             <div class="radio-group">
 
               <label class="radio-option">
+
                 <input
                   type="radio"
                   name="aide_anterieure"
                   value="Oui"
                   required
                 >
+
                 Oui
+
               </label>
 
+
               <label class="radio-option">
+
                 <input
                   type="radio"
                   name="aide_anterieure"
                   value="Non"
                 >
+
                 Non
+
               </label>
 
+
               <label class="radio-option">
+
                 <input
                   type="radio"
                   name="aide_anterieure"
                   value="Je ne sais pas"
                 >
+
                 Je ne sais pas
+
               </label>
 
             </div>
 
           </div>
+
 
 
           <div class="field">
@@ -780,39 +1278,52 @@
               sociale auparavant ?<span class="req">*</span>
             </label>
 
+
             <div class="radio-group">
 
               <label class="radio-option">
+
                 <input
                   type="radio"
                   name="demande_anterieure"
                   value="Oui"
                   required
                 >
+
                 Oui
+
               </label>
 
+
               <label class="radio-option">
+
                 <input
                   type="radio"
                   name="demande_anterieure"
                   value="Non"
                 >
+
                 Non
+
               </label>
 
+
               <label class="radio-option">
+
                 <input
                   type="radio"
                   name="demande_anterieure"
                   value="Je ne sais pas"
                 >
+
                 Je ne sais pas
+
               </label>
 
             </div>
 
           </div>
+
 
 
           <div class="field">
@@ -822,39 +1333,52 @@
               ou d'un document d'identité en cours de validité ?<span class="req">*</span>
             </label>
 
+
             <div class="radio-group">
 
               <label class="radio-option">
+
                 <input
                   type="radio"
                   name="cni_valide"
                   value="Oui"
                   required
                 >
+
                 Oui
+
               </label>
 
+
               <label class="radio-option">
+
                 <input
                   type="radio"
                   name="cni_valide"
                   value="Non"
                 >
+
                 Non
+
               </label>
 
+
               <label class="radio-option">
+
                 <input
                   type="radio"
                   name="cni_valide"
                   value="Je ne sais pas"
                 >
+
                 Je ne sais pas
+
               </label>
 
             </div>
 
           </div>
+
 
 
           <div class="field">
@@ -863,39 +1387,52 @@
               Votre carte Vitale est-elle à jour ?<span class="req">*</span>
             </label>
 
+
             <div class="radio-group">
 
               <label class="radio-option">
+
                 <input
                   type="radio"
                   name="carte_vitale_ok"
                   value="Oui"
                   required
                 >
+
                 Oui
+
               </label>
 
+
               <label class="radio-option">
+
                 <input
                   type="radio"
                   name="carte_vitale_ok"
                   value="Non"
                 >
+
                 Non
+
               </label>
 
+
               <label class="radio-option">
+
                 <input
                   type="radio"
                   name="carte_vitale_ok"
                   value="Je ne sais pas"
                 >
+
                 Je ne sais pas
+
               </label>
 
             </div>
 
           </div>
+
 
 
           <div class="field">
@@ -905,39 +1442,52 @@
               à votre demande ?<span class="req">*</span>
             </label>
 
+
             <div class="radio-group">
 
               <label class="radio-option">
+
                 <input
                   type="radio"
                   name="souhaite_accompagnement"
                   value="Oui, je souhaite être accompagné(e)"
                   required
                 >
+
                 Oui, je souhaite être accompagné(e)
+
               </label>
 
+
               <label class="radio-option">
+
                 <input
                   type="radio"
                   name="souhaite_accompagnement"
                   value="Je souhaite d'abord avoir plus d'informations"
                 >
+
                 Je souhaite d'abord avoir plus d'informations
+
               </label>
 
+
               <label class="radio-option">
+
                 <input
                   type="radio"
                   name="souhaite_accompagnement"
                   value="Non, pas pour le moment"
                 >
+
                 Non, pas pour le moment
+
               </label>
 
             </div>
 
           </div>
+
 
 
           <p
@@ -949,6 +1499,7 @@
           </p>
 
 
+
           <div class="step-nav">
 
             <button
@@ -958,6 +1509,7 @@
             >
               ← Retour
             </button>
+
 
             <button
               type="button"
@@ -972,9 +1524,10 @@
         </section>
 
 
-        <!-- ==================================================
-             ÉTAPE 3 — CONTACT
-        =================================================== -->
+
+        <!-- =================================================
+             ÉTAPE 3
+        ================================================== -->
 
         <section
           class="block"
@@ -986,9 +1539,11 @@
             Étape 3
           </p>
 
+
           <h2>
             Comment souhaitez-vous être contacté(e) ?
           </h2>
+
 
 
           <div class="field">
@@ -997,39 +1552,52 @@
               Préférez-vous être contacté(e) par<span class="req">*</span>
             </label>
 
+
             <div class="radio-group">
 
               <label class="radio-option">
+
                 <input
                   type="radio"
                   name="canal_contact"
                   value="WhatsApp"
                   required
                 >
+
                 WhatsApp
+
               </label>
 
+
               <label class="radio-option">
+
                 <input
                   type="radio"
                   name="canal_contact"
                   value="E-mail"
                 >
+
                 E-mail
+
               </label>
 
+
               <label class="radio-option">
+
                 <input
                   type="radio"
                   name="canal_contact"
                   value="Les deux"
                 >
+
                 Les deux
+
               </label>
 
             </div>
 
           </div>
+
 
 
           <div class="field">
@@ -1039,30 +1607,39 @@
               dans les prochaines étapes ?<span class="req">*</span>
             </label>
 
+
             <div class="radio-group">
 
               <label class="radio-option">
+
                 <input
                   type="radio"
                   name="contact_prochaines_etapes"
                   value="Oui"
                   required
                 >
+
                 Oui
+
               </label>
 
+
               <label class="radio-option">
+
                 <input
                   type="radio"
                   name="contact_prochaines_etapes"
                   value="Non"
                 >
+
                 Non
+
               </label>
 
             </div>
 
           </div>
+
 
 
           <p
@@ -1074,6 +1651,7 @@
           </p>
 
 
+
           <div class="step-nav">
 
             <button
@@ -1083,6 +1661,7 @@
             >
               ← Retour
             </button>
+
 
             <button
               type="button"
@@ -1097,9 +1676,10 @@
         </section>
 
 
-        <!-- ==================================================
+
+        <!-- =================================================
              ÉTAPE 4 — DOCUMENTS
-        =================================================== -->
+        ================================================== -->
 
         <section
           class="block"
@@ -1111,9 +1691,11 @@
             Étape 4
           </p>
 
+
           <h2>
             Documents nécessaires à votre demande
           </h2>
+
 
           <p
             class="hint"
@@ -1125,17 +1707,22 @@
           </p>
 
 
+
+          <!-- CNI 1 -->
+
           <div class="field">
 
             <label for="cni_1">
               Pièce d'identité (face 1)<span class="req">*</span>
             </label>
 
+
             <div class="file-input">
 
               <span class="flabel">
                 Sélectionnez votre document
               </span>
+
 
               <input
                 type="file"
@@ -1145,10 +1732,19 @@
                 required
               >
 
+
+              <div
+                class="file-status"
+                id="status_cni_1"
+              ></div>
+
             </div>
 
           </div>
 
+
+
+          <!-- CNI 2 -->
 
           <div class="field">
 
@@ -1156,11 +1752,13 @@
               Pièce d'identité (face 2)<span class="req">*</span>
             </label>
 
+
             <div class="file-input">
 
               <span class="flabel">
                 Sélectionnez votre document
               </span>
+
 
               <input
                 type="file"
@@ -1170,10 +1768,19 @@
                 required
               >
 
+
+              <div
+                class="file-status"
+                id="status_cni_2"
+              ></div>
+
             </div>
 
           </div>
 
+
+
+          <!-- VITALE 1 -->
 
           <div class="field">
 
@@ -1181,11 +1788,13 @@
               Carte Vitale (face 1)<span class="req">*</span>
             </label>
 
+
             <div class="file-input">
 
               <span class="flabel">
                 Sélectionnez votre document
               </span>
+
 
               <input
                 type="file"
@@ -1195,10 +1804,19 @@
                 required
               >
 
+
+              <div
+                class="file-status"
+                id="status_vitale_1"
+              ></div>
+
             </div>
 
           </div>
 
+
+
+          <!-- VITALE 2 -->
 
           <div class="field">
 
@@ -1206,11 +1824,13 @@
               Carte Vitale (face 2)<span class="req">*</span>
             </label>
 
+
             <div class="file-input">
 
               <span class="flabel">
                 Sélectionnez votre document
               </span>
+
 
               <input
                 type="file"
@@ -1220,10 +1840,19 @@
                 required
               >
 
+
+              <div
+                class="file-status"
+                id="status_vitale_2"
+              ></div>
+
             </div>
 
           </div>
 
+
+
+          <!-- DOMICILE -->
 
           <div class="field">
 
@@ -1231,11 +1860,13 @@
               Justificatif de domicile<span class="req">*</span>
             </label>
 
+
             <div class="file-input">
 
               <span class="flabel">
                 Sélectionnez votre document
               </span>
+
 
               <input
                 type="file"
@@ -1245,10 +1876,19 @@
                 required
               >
 
+
+              <div
+                class="file-status"
+                id="status_justif_domicile"
+              ></div>
+
             </div>
 
           </div>
 
+
+
+          <!-- IMPÔT -->
 
           <div class="field">
 
@@ -1256,11 +1896,13 @@
               Avis d'impôt<span class="req">*</span>
             </label>
 
+
             <div class="file-input">
 
               <span class="flabel">
                 Sélectionnez votre document
               </span>
+
 
               <input
                 type="file"
@@ -1270,10 +1912,19 @@
                 required
               >
 
+
+              <div
+                class="file-status"
+                id="status_avis_impot"
+              ></div>
+
             </div>
 
           </div>
 
+
+
+          <!-- FACTURE -->
 
           <div class="field">
 
@@ -1281,11 +1932,13 @@
               Facture d'électricité ou d'énergie / gaz<span class="req">*</span>
             </label>
 
+
             <div class="file-input">
 
               <span class="flabel">
                 Sélectionnez votre document
               </span>
+
 
               <input
                 type="file"
@@ -1295,9 +1948,16 @@
                 required
               >
 
+
+              <div
+                class="file-status"
+                id="status_facture_energie"
+              ></div>
+
             </div>
 
           </div>
+
 
 
           <p
@@ -1309,6 +1969,7 @@
           </p>
 
 
+
           <div class="step-nav">
 
             <button
@@ -1318,6 +1979,7 @@
             >
               ← Retour
             </button>
+
 
             <button
               type="button"
@@ -1332,9 +1994,10 @@
         </section>
 
 
-        <!-- ==================================================
-             ÉTAPE 5 — FOYER
-        =================================================== -->
+
+        <!-- =================================================
+             ÉTAPE 5
+        ================================================== -->
 
         <section
           class="block"
@@ -1346,9 +2009,11 @@
             Étape 5
           </p>
 
+
           <h2>
             Votre foyer
           </h2>
+
 
 
           <div class="field">
@@ -1356,6 +2021,7 @@
             <label for="nb_enfants">
               Nombre d'enfants<span class="req">*</span>
             </label>
+
 
             <input
               type="number"
@@ -1369,11 +2035,13 @@
           </div>
 
 
+
           <div class="field">
 
             <label for="nb_femmes">
               Nombre de femmes dans le foyer<span class="req">*</span>
             </label>
+
 
             <input
               type="number"
@@ -1387,36 +2055,46 @@
           </div>
 
 
+
           <div class="field">
 
             <label>
               Salarié(e)<span class="req">*</span>
             </label>
 
+
             <div class="radio-group">
 
               <label class="radio-option">
+
                 <input
                   type="radio"
                   name="salarie"
                   value="Oui"
                   required
                 >
+
                 Oui
+
               </label>
 
+
               <label class="radio-option">
+
                 <input
                   type="radio"
                   name="salarie"
                   value="Non"
                 >
+
                 Non
+
               </label>
 
             </div>
 
           </div>
+
 
 
           <p
@@ -1426,6 +2104,7 @@
             Merci de compléter tous les champs obligatoires avant de
             soumettre votre demande.
           </p>
+
 
 
           <div class="step-nav">
@@ -1438,8 +2117,10 @@
               ← Retour
             </button>
 
+
             <button
               type="submit"
+              id="submitButton"
             >
               Soumettre ma demande
             </button>
@@ -1448,85 +2129,152 @@
 
         </section>
 
+
       </form>
 
 
-      <!-- =========================
+
+      <!-- =================================================
            FOOTER
-      ========================== -->
+      ================================================== -->
 
       <footer>
 
         Ce formulaire est un outil d'accompagnement indépendant.
-        Il ne se substitue à aucune démarche officielle auprès d'un
-        organisme public.
+        Il ne se substitue à aucune démarche officielle auprès
+        d'un organisme public.
 
       </footer>
+
 
     </main>
 
   </div>
 
 
-  <!-- ======================================================
+
+  <!-- =====================================================
        JAVASCRIPT
-  ======================================================= -->
+  ====================================================== -->
 
   <script>
 
-    const form = document.getElementById("mainForm");
+    /*
+     * ======================================================
+     * VARIABLES
+     * ======================================================
+     */
 
-    const steps = Array.from(
-      document.querySelectorAll(".block")
-    );
+    const form =
+      document.getElementById("mainForm");
 
-    const totalSteps = steps.length;
 
-    const track = document.getElementById("progressTrack");
+    const steps =
+      Array.from(
+        document.querySelectorAll(".block")
+      );
 
-    const caption = document.getElementById("progressCaption");
+
+    const totalSteps =
+      steps.length;
+
+
+    const track =
+      document.getElementById("progressTrack");
+
+
+    const caption =
+      document.getElementById("progressCaption");
+
+
+    const submitButton =
+      document.getElementById("submitButton");
+
 
     let current = 1;
 
 
-    /* ======================================================
-       CRÉATION DE LA BARRE DE PROGRESSION
-    ======================================================= */
+    /*
+     * ======================================================
+     * LIMITES FICHIERS
+     * ======================================================
+     *
+     * Netlify :
+     * maximum officiel = 8 Mo par requête.
+     *
+     * Nous gardons une marge et visons 6 Mo maximum
+     * pour l'ensemble des fichiers.
+     */
+
+    const MAX_IMAGE_SIZE =
+      750 * 1024;
+
+
+    const MAX_PDF_SIZE =
+      1.2 * 1024 * 1024;
+
+
+    const MAX_TOTAL_SIZE =
+      6 * 1024 * 1024;
+
+
+    /*
+     * ======================================================
+     * BARRE DE PROGRESSION
+     * ======================================================
+     */
 
     steps.forEach((_, index) => {
 
-      const segment = document.createElement("div");
-
-      segment.className = "progress-seg";
-
-      segment.dataset.seg = index + 1;
+      const segment =
+        document.createElement("div");
 
 
-      const fill = document.createElement("div");
+      segment.className =
+        "progress-seg";
 
-      fill.className = "fill";
+
+      segment.dataset.seg =
+        index + 1;
+
+
+      const fill =
+        document.createElement("div");
+
+
+      fill.className =
+        "fill";
+
 
       segment.appendChild(fill);
+
 
       track.appendChild(segment);
 
     });
 
 
-    /* ======================================================
-       MISE À JOUR DE LA PROGRESSION
-    ======================================================= */
+    /*
+     * ======================================================
+     * PROGRESSION
+     * ======================================================
+     */
 
     function updateProgress() {
 
       const segments =
-        track.querySelectorAll(".progress-seg");
+        track.querySelectorAll(
+          ".progress-seg"
+        );
 
 
       segments.forEach(segment => {
 
         const number =
-          parseInt(segment.dataset.seg, 10);
+          parseInt(
+            segment.dataset.seg,
+            10
+          );
 
 
         segment.classList.toggle(
@@ -1546,7 +2294,9 @@
 
 
         if (number > current) {
+
           fill.style.width = "0%";
+
         }
 
       });
@@ -1558,35 +2308,46 @@
     }
 
 
-    /* ======================================================
-       AFFICHER UNE ÉTAPE
-    ======================================================= */
+    /*
+     * ======================================================
+     * AFFICHER UNE ÉTAPE
+     * ======================================================
+     */
 
     function showStep(number) {
 
-      if (number < 1 || number > totalSteps) {
+      if (
+        number < 1 ||
+        number > totalSteps
+      ) {
+
         return;
+
       }
 
 
       steps.forEach(step => {
 
         const stepNumber =
-          parseInt(step.dataset.step, 10);
+          parseInt(
+            step.dataset.step,
+            10
+          );
 
-        const isActive =
+
+        const active =
           stepNumber === number;
 
 
         step.classList.toggle(
           "active",
-          isActive
+          active
         );
 
 
         step.setAttribute(
           "aria-hidden",
-          String(!isActive)
+          String(!active)
         );
 
       });
@@ -1594,32 +2355,44 @@
 
       current = number;
 
+
       updateProgress();
 
 
       window.scrollTo({
-        top: document.querySelector("main").offsetTop - 20,
+
+        top:
+          document.querySelector(
+            "main"
+          ).offsetTop - 20,
+
         behavior: "smooth"
+
       });
 
     }
 
 
-    /* ======================================================
-       VALIDATION D'UNE ÉTAPE
-    ======================================================= */
+    /*
+     * ======================================================
+     * VALIDATION
+     * ======================================================
+     */
 
     function validateStep(section) {
 
       let valid = true;
+
+
+      /*
+       * Champs normaux
+       */
 
       const requiredInputs =
         section.querySelectorAll(
           "input[required], select[required]"
         );
 
-
-      /* Validation des champs classiques */
 
       requiredInputs.forEach(input => {
 
@@ -1642,7 +2415,9 @@
       });
 
 
-      /* Validation des fichiers */
+      /*
+       * Fichiers
+       */
 
       const fileInputs =
         section.querySelectorAll(
@@ -1664,23 +2439,28 @@
       });
 
 
-      /* Validation des groupes radio */
+      /*
+       * Radios
+       */
 
-      const radioInputs =
+      const radios =
         section.querySelectorAll(
           'input[type="radio"][required]'
         );
 
 
-      const radioNames = [
+      const names = [
         ...new Set(
-          Array.from(radioInputs)
-            .map(input => input.name)
+          Array.from(radios)
+            .map(
+              radio =>
+                radio.name
+            )
         )
       ];
 
 
-      radioNames.forEach(name => {
+      names.forEach(name => {
 
         const checked =
           section.querySelector(
@@ -1689,7 +2469,9 @@
 
 
         if (!checked) {
+
           valid = false;
+
         }
 
       });
@@ -1700,211 +2482,1053 @@
     }
 
 
-    /* ======================================================
-       AFFICHAGE D'UNE ERREUR
-    ======================================================= */
+    /*
+     * ======================================================
+     * ERREUR
+     * ======================================================
+     */
 
     function showValidationError(section) {
 
       const error =
-        section.querySelector(".error-msg");
+        section.querySelector(
+          ".error-msg"
+        );
 
 
       if (error) {
 
-        error.classList.add("show");
+        error.classList.add(
+          "show"
+        );
 
       }
 
 
-      const firstInvalid =
+      const invalid =
         section.querySelector(
           "input:invalid, select:invalid"
         );
 
 
-      if (firstInvalid) {
+      if (invalid) {
 
-        firstInvalid.focus();
+        invalid.focus();
 
       }
 
     }
 
 
-    /* ======================================================
-       BOUTONS "SUIVANT"
-    ======================================================= */
+    /*
+     * ======================================================
+     * SUIVANT
+     * ======================================================
+     */
 
     document
       .querySelectorAll("[data-next]")
       .forEach(button => {
 
-        button.addEventListener("click", () => {
+        button.addEventListener(
+          "click",
+          () => {
 
-          const section =
-            button.closest(".block");
+            const section =
+              button.closest(
+                ".block"
+              );
 
 
-          const error =
-            section.querySelector(".error-msg");
+            const error =
+              section.querySelector(
+                ".error-msg"
+              );
 
 
-          if (validateStep(section)) {
+            if (
+              validateStep(
+                section
+              )
+            ) {
 
-            if (error) {
-              error.classList.remove("show");
+              if (error) {
+
+                error.classList.remove(
+                  "show"
+                );
+
+              }
+
+
+              showStep(
+                current + 1
+              );
+
+            } else {
+
+              showValidationError(
+                section
+              );
+
             }
 
-
-            showStep(current + 1);
-
-          } else {
-
-            showValidationError(section);
-
           }
-
-        });
+        );
 
       });
 
 
-    /* ======================================================
-       BOUTONS "RETOUR"
-    ======================================================= */
+    /*
+     * ======================================================
+     * RETOUR
+     * ======================================================
+     */
 
     document
       .querySelectorAll("[data-back]")
       .forEach(button => {
 
-        button.addEventListener("click", () => {
+        button.addEventListener(
+          "click",
+          () => {
 
-          const currentSection =
-            document.querySelector(
-              `.block[data-step="${current}"]`
+            showStep(
+              current - 1
             );
 
-
-          if (currentSection) {
-
-            const error =
-              currentSection.querySelector(".error-msg");
-
-
-            if (error) {
-              error.classList.remove("show");
-            }
-
           }
-
-
-          showStep(current - 1);
-
-        });
-
-      });
-
-
-    /* ======================================================
-       MASQUER L'ERREUR LORSQU'ON MODIFIE UN CHAMP
-    ======================================================= */
-
-    form
-      .querySelectorAll("input, select")
-      .forEach(input => {
-
-        input.addEventListener("input", () => {
-
-          const section =
-            input.closest(".block");
-
-
-          if (section) {
-
-            const error =
-              section.querySelector(".error-msg");
-
-
-            if (
-              error &&
-              validateStep(section)
-            ) {
-
-              error.classList.remove("show");
-
-            }
-
-          }
-
-        });
-
-
-        input.addEventListener("change", () => {
-
-          const section =
-            input.closest(".block");
-
-
-          if (section) {
-
-            const error =
-              section.querySelector(".error-msg");
-
-
-            if (
-              error &&
-              validateStep(section)
-            ) {
-
-              error.classList.remove("show");
-
-            }
-
-          }
-
-        });
-
-      });
-
-
-    /* ======================================================
-       VALIDATION FINALE AVANT ENVOI
-    ======================================================= */
-
-    form.addEventListener("submit", event => {
-
-      const lastStep =
-        document.querySelector(
-          `.block[data-step="${totalSteps}"]`
         );
 
+      });
 
-      if (!validateStep(lastStep)) {
 
-        event.preventDefault();
+    /*
+     * ======================================================
+     * FORMAT TAILLE
+     * ======================================================
+     */
 
-        showValidationError(lastStep);
+    function formatSize(bytes) {
 
-        return;
+      if (
+        bytes < 1024
+      ) {
+
+        return (
+          bytes +
+          " octets"
+        );
 
       }
 
-      /*
-        IMPORTANT :
-        Aucun preventDefault() ici lorsque tout est valide.
 
-        Le navigateur laisse donc Netlify recevoir
-        normalement le formulaire et redirige ensuite
-        vers /merci.html grâce à action="/merci.html".
-      */
+      if (
+        bytes <
+        1024 * 1024
+      ) {
+
+        return (
+          (bytes / 1024)
+            .toFixed(0) +
+          " Ko"
+        );
+
+      }
+
+
+      return (
+        (bytes /
+          (1024 * 1024))
+          .toFixed(2) +
+        " Mo"
+      );
+
+    }
+
+
+    /*
+     * ======================================================
+     * COMPRESSER UNE IMAGE
+     * ======================================================
+     */
+
+    function compressImage(file) {
+
+      return new Promise(
+        (resolve, reject) => {
+
+          /*
+           * Pas une image :
+           * on ne touche pas au fichier.
+           */
+
+          if (
+            !file.type.startsWith(
+              "image/"
+            )
+          ) {
+
+            resolve(file);
+
+            return;
+
+          }
+
+
+          const reader =
+            new FileReader();
+
+
+          reader.onload =
+            event => {
+
+              const img =
+                new Image();
+
+
+              img.onload =
+                () => {
+
+                  /*
+                   * Dimensions maximum.
+                   */
+
+                  const MAX_WIDTH =
+                    1600;
+
+
+                  const MAX_HEIGHT =
+                    1600;
+
+
+                  let width =
+                    img.width;
+
+
+                  let height =
+                    img.height;
+
+
+                  /*
+                   * Réduction largeur.
+                   */
+
+                  if (
+                    width >
+                    MAX_WIDTH
+                  ) {
+
+                    height =
+                      height *
+                      MAX_WIDTH /
+                      width;
+
+
+                    width =
+                      MAX_WIDTH;
+
+                  }
+
+
+                  /*
+                   * Réduction hauteur.
+                   */
+
+                  if (
+                    height >
+                    MAX_HEIGHT
+                  ) {
+
+                    width =
+                      width *
+                      MAX_HEIGHT /
+                      height;
+
+
+                    height =
+                      MAX_HEIGHT;
+
+                  }
+
+
+                  /*
+                   * Canvas.
+                   */
+
+                  const canvas =
+                    document.createElement(
+                      "canvas"
+                    );
+
+
+                  canvas.width =
+                    Math.round(width);
+
+
+                  canvas.height =
+                    Math.round(height);
+
+
+                  const context =
+                    canvas.getContext(
+                      "2d"
+                    );
+
+
+                  context.drawImage(
+                    img,
+                    0,
+                    0,
+                    canvas.width,
+                    canvas.height
+                  );
+
+
+                  /*
+                   * Qualité initiale.
+                   */
+
+                  let quality =
+                    0.72;
+
+
+                  function makeBlob() {
+
+                    canvas.toBlob(
+                      blob => {
+
+                        if (!blob) {
+
+                          reject(
+                            new Error(
+                              "Impossible de compresser l'image."
+                            )
+                          );
+
+                          return;
+
+                        }
+
+
+                        /*
+                         * Si trop gros,
+                         * on réduit encore.
+                         */
+
+                        if (
+                          blob.size >
+                          MAX_IMAGE_SIZE &&
+                          quality >
+                          0.35
+                        ) {
+
+                          quality -=
+                            0.07;
+
+
+                          makeBlob();
+
+                          return;
+
+                        }
+
+
+                        const newName =
+                          file.name
+                            .replace(
+                              /\.[^/.]+$/,
+                              ""
+                            ) +
+                          ".jpg";
+
+
+                        const compressed =
+                          new File(
+                            [blob],
+                            newName,
+                            {
+                              type:
+                                "image/jpeg",
+
+                              lastModified:
+                                Date.now()
+                            }
+                          );
+
+
+                        resolve(
+                          compressed
+                        );
+
+                      },
+
+                      "image/jpeg",
+
+                      quality
+
+                    );
+
+                  }
+
+
+                  makeBlob();
+
+                };
+
+
+              img.onerror =
+                () => {
+
+                  reject(
+                    new Error(
+                      "Image non compatible ou impossible à lire."
+                    )
+                  );
+
+                };
+
+
+              img.src =
+                event.target.result;
+
+            };
+
+
+          reader.onerror =
+            () => {
+
+              reject(
+                new Error(
+                  "Impossible de lire le fichier."
+                )
+              );
+
+            };
+
+
+          reader.readAsDataURL(
+            file
+          );
+
+        }
+      );
+
+    }
+
+
+    /*
+     * ======================================================
+     * REMPLACER UN FICHIER
+     * ======================================================
+     */
+
+    function replaceInputFile(
+      input,
+      file
+    ) {
+
+      const dataTransfer =
+        new DataTransfer();
+
+
+      dataTransfer.items.add(
+        file
+      );
+
+
+      input.files =
+        dataTransfer.files;
+
+    }
+
+
+    /*
+     * ======================================================
+     * CALCUL TOTAL
+     * ======================================================
+     */
+
+    function calculateTotalFilesSize() {
+
+      let total = 0;
+
+
+      const inputs =
+        form.querySelectorAll(
+          'input[type="file"]'
+        );
+
+
+      inputs.forEach(input => {
+
+        if (
+          input.files &&
+          input.files.length
+        ) {
+
+          for (
+            let i = 0;
+            i < input.files.length;
+            i++
+          ) {
+
+            total +=
+              input.files[i].size;
+
+          }
+
+        }
+
+      });
+
+
+      return total;
+
+    }
+
+
+    /*
+     * ======================================================
+     * AFFICHER STATUT FICHIER
+     * ======================================================
+     */
+
+    function updateFileStatus(
+      input,
+      text
+    ) {
+
+      const status =
+        document.getElementById(
+          "status_" +
+          input.id
+        );
+
+
+      if (status) {
+
+        status.textContent =
+          text;
+
+      }
+
+    }
+
+
+    /*
+     * ======================================================
+     * GESTION DES FICHIERS
+     * ======================================================
+     */
+
+    const fileInputs =
+      form.querySelectorAll(
+        'input[type="file"]'
+      );
+
+
+    fileInputs.forEach(input => {
+
+      input.addEventListener(
+        "change",
+        async () => {
+
+          if (
+            !input.files ||
+            !input.files.length
+          ) {
+
+            return;
+
+          }
+
+
+          const original =
+            input.files[0];
+
+
+          /*
+           * PDF
+           */
+
+          const isPDF =
+            original.type ===
+              "application/pdf" ||
+            original.name
+              .toLowerCase()
+              .endsWith(".pdf");
+
+
+          if (isPDF) {
+
+            if (
+              original.size >
+              MAX_PDF_SIZE
+            ) {
+
+              alert(
+                "Ce PDF est trop volumineux.\n\n" +
+                "Taille : " +
+                formatSize(
+                  original.size
+                ) +
+                "\n\n" +
+                "Maximum recommandé : " +
+                formatSize(
+                  MAX_PDF_SIZE
+                )
+              );
+
+
+              input.value = "";
+
+
+              updateFileStatus(
+                input,
+                ""
+              );
+
+
+              return;
+
+            }
+
+
+            updateFileStatus(
+              input,
+              "PDF sélectionné : " +
+              formatSize(
+                original.size
+              )
+            );
+
+
+            return;
+
+          }
+
+
+          /*
+           * IMAGE
+           */
+
+          if (
+            original.type.startsWith(
+              "image/"
+            )
+          ) {
+
+            updateFileStatus(
+              input,
+              "Compression en cours…"
+            );
+
+
+            try {
+
+              const compressed =
+                await compressImage(
+                  original
+                );
+
+
+              replaceInputFile(
+                input,
+                compressed
+              );
+
+
+              updateFileStatus(
+                input,
+                "Document prêt : " +
+                formatSize(
+                  compressed.size
+                )
+              );
+
+
+            } catch (error) {
+
+              console.error(
+                error
+              );
+
+
+              alert(
+                "Cette image n'a pas pu être compressée.\n\n" +
+                "Veuillez sélectionner une image JPEG ou PNG."
+              );
+
+
+              input.value = "";
+
+
+              updateFileStatus(
+                input,
+                ""
+              );
+
+            }
+
+          }
+
+        }
+      );
 
     });
 
 
-    /* ======================================================
-       INITIALISATION
-    ======================================================= */
+    /*
+     * ======================================================
+     * MASQUER ERREUR APRÈS MODIFICATION
+     * ======================================================
+     */
+
+    form
+      .querySelectorAll(
+        "input, select"
+      )
+      .forEach(input => {
+
+        input.addEventListener(
+          "input",
+          () => {
+
+            const section =
+              input.closest(
+                ".block"
+              );
+
+
+            if (!section) {
+              return;
+            }
+
+
+            const error =
+              section.querySelector(
+                ".error-msg"
+              );
+
+
+            if (
+              error &&
+              validateStep(
+                section
+              )
+            ) {
+
+              error.classList.remove(
+                "show"
+              );
+
+            }
+
+          }
+        );
+
+
+        input.addEventListener(
+          "change",
+          () => {
+
+            const section =
+              input.closest(
+                ".block"
+              );
+
+
+            if (!section) {
+              return;
+            }
+
+
+            const error =
+              section.querySelector(
+                ".error-msg"
+              );
+
+
+            if (
+              error &&
+              validateStep(
+                section
+              )
+            ) {
+
+              error.classList.remove(
+                "show"
+              );
+
+            }
+
+          }
+        );
+
+      });
+
+
+    /*
+     * ======================================================
+     * SOUMISSION FINALE
+     * ======================================================
+     *
+     * IMPORTANT :
+     *
+     * On prépare les fichiers,
+     * puis on laisse le navigateur effectuer
+     * le POST multipart/form-data normal vers Netlify.
+     *
+     * Pas de fetch().
+     * Pas de Content-Type manuel.
+     */
+
+    let isSubmitting =
+      false;
+
+
+    form.addEventListener(
+      "submit",
+      async event => {
+
+        /*
+         * Si déjà envoyé,
+         * ne rien refaire.
+         */
+
+        if (
+          isSubmitting
+        ) {
+
+          return;
+
+        }
+
+
+        /*
+         * Empêche temporairement
+         * l'envoi pendant la préparation.
+         */
+
+        event.preventDefault();
+
+
+        /*
+         * Validation dernière étape.
+         */
+
+        const lastStep =
+          document.querySelector(
+            `.block[data-step="${totalSteps}"]`
+          );
+
+
+        if (
+          !validateStep(
+            lastStep
+          )
+        ) {
+
+          showValidationError(
+            lastStep
+          );
+
+          return;
+
+        }
+
+
+        /*
+         * Désactiver le bouton.
+         */
+
+        const originalText =
+          submitButton.textContent;
+
+
+        submitButton.disabled =
+          true;
+
+
+        submitButton.textContent =
+          "Préparation…";
+
+
+        try {
+
+          /*
+           * Recompression finale
+           * de toutes les images.
+           */
+
+          const inputs =
+            form.querySelectorAll(
+              'input[type="file"]'
+            );
+
+
+          for (
+            const input
+            of inputs
+          ) {
+
+            if (
+              !input.files ||
+              !input.files.length
+            ) {
+
+              continue;
+
+            }
+
+
+            const file =
+              input.files[0];
+
+
+            if (
+              file.type.startsWith(
+                "image/"
+              )
+            ) {
+
+              const compressed =
+                await compressImage(
+                  file
+                );
+
+
+              replaceInputFile(
+                input,
+                compressed
+              );
+
+            }
+
+          }
+
+
+          /*
+           * Calcul taille totale.
+           */
+
+          const totalSize =
+            calculateTotalFilesSize();
+
+
+          console.log(
+            "Taille totale des fichiers :",
+            formatSize(
+              totalSize
+            )
+          );
+
+
+          /*
+           * Vérification.
+           */
+
+          if (
+            totalSize >
+            MAX_TOTAL_SIZE
+          ) {
+
+            alert(
+              "Les documents sont encore trop volumineux.\n\n" +
+
+              "Taille actuelle : " +
+              formatSize(
+                totalSize
+              ) +
+
+              "\n\n" +
+
+              "Maximum recommandé : " +
+              formatSize(
+                MAX_TOTAL_SIZE
+              ) +
+
+              "\n\n" +
+
+              "Veuillez sélectionner des documents plus légers."
+            );
+
+
+            submitButton.disabled =
+              false;
+
+
+            submitButton.textContent =
+              originalText;
+
+
+            return;
+
+          }
+
+
+          /*
+           * Tout est prêt.
+           */
+
+          isSubmitting =
+            true;
+
+
+          submitButton.textContent =
+            "Envoi en cours…";
+
+
+          /*
+           * ENVOI NATIF NETLIFY
+           *
+           * Cette méthode envoie bien les fichiers
+           * avec multipart/form-data.
+           */
+
+          HTMLFormElement
+            .prototype
+            .submit
+            .call(form);
+
+
+        } catch (error) {
+
+          console.error(
+            "Erreur :",
+            error
+          );
+
+
+          alert(
+            "Une erreur est survenue pendant la préparation des documents.\n\n" +
+            "Veuillez réessayer."
+          );
+
+
+          isSubmitting =
+            false;
+
+
+          submitButton.disabled =
+            false;
+
+
+          submitButton.textContent =
+            originalText;
+
+        }
+
+      }
+    );
+
+
+    /*
+     * ======================================================
+     * INITIALISATION
+     * ======================================================
+     */
 
     updateProgress();
 
@@ -1912,5 +3536,7 @@
 
   </script>
 
+
 </body>
+
 </html>
