@@ -1,667 +1,1916 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Demande d'accompagnement — Vérification de votre situation</title>
-<style>
-  :root {
-    --ink: #1f2b24;
-    --ink-soft: #4a5750;
-    --paper: #f7f6f1;
-    --card: #ffffff;
-    --sage: #3c5a48;
-    --sage-deep: #2a4234;
-    --line: #d9d5c9;
-    --warn-bg: #fbf3e3;
-    --warn-line: #e0c98f;
-    --error: #a3372c;
-    --radius: 10px;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  * { box-sizing: border-box; }
+  <title>Demande d'accompagnement — Vérification de votre situation</title>
 
-  body {
-    margin: 0;
-    font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
-    background: var(--paper);
-    color: var(--ink);
-    line-height: 1.55;
-  }
+  <style>
+    :root {
+      --ink: #1f2b24;
+      --ink-soft: #4a5750;
+      --paper: #f7f6f1;
+      --card: #ffffff;
+      --sage: #3c5a48;
+      --sage-deep: #2a4234;
+      --line: #d9d5c9;
+      --warn-bg: #fbf3e3;
+      --warn-line: #e0c98f;
+      --error: #a3372c;
+      --success: #2f6b45;
+      --radius: 10px;
+    }
 
-  .wrap {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 0 20px 80px;
-  }
+    * {
+      box-sizing: border-box;
+    }
 
-  header.hero {
-    background: var(--sage-deep);
-    color: #f1f0e6;
-    padding: 56px 20px 40px;
-    margin-bottom: -28px;
-  }
+    html {
+      scroll-behavior: smooth;
+    }
 
-  header.hero .hero-inner {
-    max-width: 720px;
-    margin: 0 auto;
-  }
+    body {
+      margin: 0;
+      font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.55;
+    }
 
-  .eyebrow {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    font-size: 12px;
-    color: #b9cdbd;
-    margin: 0 0 14px;
-  }
+    .wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+    }
 
-  header.hero h1 {
-    font-size: clamp(28px, 5vw, 38px);
-    line-height: 1.15;
-    margin: 0 0 16px;
-    font-weight: 600;
-  }
+    /* =========================
+       HERO
+    ========================== */
 
-  header.hero p {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    color: #d8ddd3;
-    font-size: 15.5px;
-    max-width: 54ch;
-    margin: 0;
-  }
+    header.hero {
+      background: var(--sage-deep);
+      color: #f1f0e6;
+      padding: 56px 20px 40px;
+      margin-bottom: -28px;
+    }
 
-  main {
-    background: var(--card);
-    border-radius: var(--radius);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 12px 32px rgba(30,40,30,0.08);
-    padding: 8px 28px 40px;
-    position: relative;
-    z-index: 1;
-  }
+    header.hero .hero-inner {
+      max-width: 720px;
+      margin: 0 auto;
+    }
 
-  .notice {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    background: var(--warn-bg);
-    border: 1px solid var(--warn-line);
-    border-radius: 8px;
-    padding: 16px 18px;
-    margin: 28px 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    font-size: 14.5px;
-    color: #5c4a1f;
-  }
+    .eyebrow {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 12px;
+      color: #b9cdbd;
+      margin: 0 0 14px;
+    }
 
-  .notice.confidential {
-    background: #eef2ea;
-    border-color: #c8d4c0;
-    color: var(--sage-deep);
-  }
+    header.hero h1 {
+      font-size: clamp(28px, 5vw, 38px);
+      line-height: 1.15;
+      margin: 0 0 16px;
+      font-weight: 600;
+    }
 
-  .notice strong { display: block; margin-bottom: 3px; }
+    header.hero p {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #d8ddd3;
+      font-size: 15.5px;
+      max-width: 54ch;
+      margin: 0;
+    }
 
-  /* Progress indicator */
-  .progress-track {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin: 30px 0 4px;
-  }
+    /* =========================
+       MAIN CARD
+    ========================== */
 
-  .progress-seg {
-    height: 4px;
-    flex: 1;
-    background: var(--line);
-    border-radius: 2px;
-    overflow: hidden;
-  }
+    main {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.06),
+        0 12px 32px rgba(30, 40, 30, 0.08);
+      padding: 8px 28px 40px;
+      position: relative;
+      z-index: 1;
+    }
 
-  .progress-seg .fill {
-    height: 100%;
-    width: 0%;
-    background: var(--sage);
-    transition: width 0.25s ease;
-  }
+    /* =========================
+       NOTICES
+    ========================== */
 
-  .progress-seg.done .fill { width: 100%; }
-  .progress-seg.active .fill { width: 100%; }
+    .notice {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      background: var(--warn-bg);
+      border: 1px solid var(--warn-line);
+      border-radius: 8px;
+      padding: 16px 18px;
+      margin: 28px 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 14.5px;
+      color: #5c4a1f;
+    }
 
-  .progress-caption {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    font-size: 12.5px;
-    color: var(--ink-soft);
-    margin-bottom: 22px;
-  }
+    .notice.confidential {
+      background: #eef2ea;
+      border-color: #c8d4c0;
+      color: var(--sage-deep);
+    }
 
-  section.block {
-    margin-top: 44px;
-    padding-top: 28px;
-    border-top: 1px solid var(--line);
-    display: none;
-  }
+    .notice strong {
+      display: block;
+      margin-bottom: 3px;
+    }
 
-  section.block.active { display: block; }
+    /* =========================
+       PROGRESS
+    ========================== */
 
-  section.block:first-of-type {
-    border-top: none;
-    margin-top: 28px;
-    padding-top: 0;
-  }
+    .progress-track {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 30px 0 4px;
+    }
 
-  .step-label {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    font-size: 12.5px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--sage);
-    font-weight: 700;
-    margin: 0 0 6px;
-  }
+    .progress-seg {
+      height: 4px;
+      flex: 1;
+      background: var(--line);
+      border-radius: 2px;
+      overflow: hidden;
+    }
 
-  section.block h2 {
-    font-size: 22px;
-    margin: 0 0 18px;
-    font-weight: 600;
-    color: var(--ink);
-  }
+    .progress-seg .fill {
+      height: 100%;
+      width: 0%;
+      background: var(--sage);
+      transition: width 0.25s ease;
+    }
 
-  .field {
-    margin-bottom: 22px;
-  }
+    .progress-seg.done .fill,
+    .progress-seg.active .fill {
+      width: 100%;
+    }
 
-  label {
-    display: block;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    font-weight: 600;
-    font-size: 15px;
-    margin-bottom: 7px;
-    color: var(--ink);
-  }
+    .progress-caption {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 12.5px;
+      color: var(--ink-soft);
+      margin-bottom: 22px;
+    }
 
-  label .req { color: var(--error); font-weight: 400; margin-left: 2px; }
-  .hint {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    font-size: 13px;
-    color: var(--ink-soft);
-    margin: -4px 0 8px;
-  }
+    /* =========================
+       STEPS
+    ========================== */
 
-  input[type="text"],
-  input[type="email"],
-  input[type="tel"],
-  input[type="number"],
-  select {
-    width: 100%;
-    padding: 12px 14px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    font-size: 15.5px;
-    border: 1px solid #c7c2b3;
-    border-radius: 8px;
-    background: #fffefb;
-    color: var(--ink);
-    outline: none;
-    transition: border-color 0.15s ease, box-shadow 0.15s ease;
-  }
+    section.block {
+      margin-top: 44px;
+      padding-top: 28px;
+      border-top: 1px solid var(--line);
+      display: none;
+    }
 
-  input:focus, select:focus, .file-input:focus-within {
-    border-color: var(--sage);
-    box-shadow: 0 0 0 3px rgba(60,90,72,0.15);
-  }
+    section.block.active {
+      display: block;
+    }
 
-  .radio-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
+    section.block:first-of-type {
+      border-top: none;
+      margin-top: 28px;
+      padding-top: 0;
+    }
 
-  .radio-option {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 14px;
-    border: 1px solid #c7c2b3;
-    border-radius: 8px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    font-size: 15px;
-    cursor: pointer;
-    background: #fffefb;
-    transition: border-color 0.15s ease, background 0.15s ease;
-  }
+    .step-label {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 12.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--sage);
+      font-weight: 700;
+      margin: 0 0 6px;
+    }
 
-  .radio-option:hover { border-color: var(--sage); }
+    section.block h2 {
+      font-size: 22px;
+      margin: 0 0 18px;
+      font-weight: 600;
+      color: var(--ink);
+    }
 
-  .radio-option input { accent-color: var(--sage); width: 17px; height: 17px; flex-shrink: 0; }
+    /* =========================
+       FIELDS
+    ========================== */
 
-  .file-input {
-    border: 1.5px dashed #b8b2a0;
-    border-radius: 8px;
-    padding: 22px 16px;
-    text-align: center;
-    background: #fbfaf6;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  }
+    .field {
+      margin-bottom: 22px;
+    }
 
-  .file-input input[type="file"] {
-    display: block;
-    margin: 10px auto 0;
-    font-size: 13.5px;
-    max-width: 100%;
-  }
+    label {
+      display: block;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 7px;
+      color: var(--ink);
+    }
 
-  .file-input .flabel {
-    font-size: 14px;
-    color: var(--ink-soft);
-  }
+    label .req {
+      color: var(--error);
+      font-weight: 400;
+      margin-left: 2px;
+    }
 
-  .step-nav {
-    display: flex;
-    gap: 12px;
-    margin-top: 34px;
-  }
+    .hint {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 13px;
+      color: var(--ink-soft);
+      margin: -4px 0 8px;
+    }
 
-  button {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    border-radius: 8px;
-    padding: 15px;
-    cursor: pointer;
-    border: none;
-    transition: background 0.15s ease, opacity 0.15s ease;
-  }
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 12px 14px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 15.5px;
+      border: 1px solid #c7c2b3;
+      border-radius: 8px;
+      background: #fffefb;
+      color: var(--ink);
+      outline: none;
+      transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
+    }
 
-  .btn-next, button[type="submit"] {
-    flex: 1;
-    background: var(--sage-deep);
-    color: #fff;
-  }
+    input:focus,
+    select:focus,
+    .file-input:focus-within {
+      border-color: var(--sage);
+      box-shadow: 0 0 0 3px rgba(60, 90, 72, 0.15);
+    }
 
-  .btn-next:hover, button[type="submit"]:hover { background: var(--sage); }
+    /* =========================
+       RADIO
+    ========================== */
 
-  .btn-back {
-    background: transparent;
-    color: var(--ink-soft);
-    border: 1px solid var(--line);
-    padding: 15px 20px;
-  }
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
 
-  .btn-back:hover { background: #f1efe8; }
+    .radio-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border: 1px solid #c7c2b3;
+      border-radius: 8px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 15px;
+      cursor: pointer;
+      background: #fffefb;
+      transition:
+        border-color 0.15s ease,
+        background 0.15s ease;
+    }
 
-  .error-msg {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    font-size: 13.5px;
-    color: var(--error);
-    margin-top: -14px;
-    margin-bottom: 20px;
-    display: none;
-  }
+    .radio-option:hover {
+      border-color: var(--sage);
+    }
 
-  .error-msg.show { display: block; }
+    .radio-option input {
+      accent-color: var(--sage);
+      width: 17px;
+      height: 17px;
+      flex-shrink: 0;
+    }
 
-  footer {
-    text-align: center;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    font-size: 12.5px;
-    color: var(--ink-soft);
-    margin-top: 30px;
-  }
+    /* =========================
+       FILE INPUT
+    ========================== */
 
-  @media (max-width: 480px) {
-    main { padding: 4px 18px 32px; }
-    header.hero { padding: 44px 16px 36px; }
-  }
-</style>
+    .file-input {
+      border: 1.5px dashed #b8b2a0;
+      border-radius: 8px;
+      padding: 22px 16px;
+      text-align: center;
+      background: #fbfaf6;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .file-input input[type="file"] {
+      display: block;
+      margin: 10px auto 0;
+      font-size: 13.5px;
+      max-width: 100%;
+    }
+
+    .file-input .flabel {
+      font-size: 14px;
+      color: var(--ink-soft);
+    }
+
+    /* =========================
+       NAVIGATION
+    ========================== */
+
+    .step-nav {
+      display: flex;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    button {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 8px;
+      padding: 15px;
+      cursor: pointer;
+      border: none;
+      transition:
+        background 0.15s ease,
+        opacity 0.15s ease,
+        transform 0.1s ease;
+    }
+
+    button:active {
+      transform: translateY(1px);
+    }
+
+    .btn-next,
+    button[type="submit"] {
+      flex: 1;
+      background: var(--sage-deep);
+      color: #fff;
+    }
+
+    .btn-next:hover,
+    button[type="submit"]:hover {
+      background: var(--sage);
+    }
+
+    .btn-back {
+      background: transparent;
+      color: var(--ink-soft);
+      border: 1px solid var(--line);
+      padding: 15px 20px;
+    }
+
+    .btn-back:hover {
+      background: #f1efe8;
+    }
+
+    /* =========================
+       ERROR
+    ========================== */
+
+    .error-msg {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 13.5px;
+      color: var(--error);
+      margin-top: -10px;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    .error-msg.show {
+      display: block;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+
+    footer {
+      text-align: center;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 12.5px;
+      color: var(--ink-soft);
+      margin-top: 30px;
+    }
+
+    /* =========================
+       MOBILE
+    ========================== */
+
+    @media (max-width: 480px) {
+      .wrap {
+        padding: 0 12px 60px;
+      }
+
+      main {
+        padding: 4px 18px 32px;
+      }
+
+      header.hero {
+        padding: 44px 16px 36px;
+      }
+
+      .notice {
+        font-size: 13.5px;
+        padding: 14px;
+      }
+
+      section.block h2 {
+        font-size: 21px;
+      }
+
+      .step-nav {
+        gap: 8px;
+      }
+
+      .btn-back {
+        padding: 15px 14px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<header class="hero">
-  <div class="hero-inner">
-    <p class="eyebrow">Demande d'accompagnement</p>
-    <h1>Vérification de votre situation</h1>
-    <p>Merci de prendre quelques minutes pour compléter ce formulaire. Il nous permet de recueillir les informations nécessaires pour étudier votre demande et vous accompagner dans vos démarches.</p>
+  <!-- =========================
+       HERO
+  ========================== -->
+
+  <header class="hero">
+    <div class="hero-inner">
+
+      <p class="eyebrow">
+        Demande d'accompagnement
+      </p>
+
+      <h1>
+        Vérification de votre situation
+      </h1>
+
+      <p>
+        Merci de prendre quelques minutes pour compléter ce formulaire.
+        Il nous permet de recueillir les informations nécessaires pour
+        étudier votre demande et vous accompagner dans vos démarches.
+      </p>
+
+    </div>
+  </header>
+
+
+  <div class="wrap">
+
+    <main>
+
+      <!-- =========================
+           CONFIDENTIALITÉ
+      ========================== -->
+
+      <div class="notice confidential">
+
+        <span>🔒</span>
+
+        <div>
+          <strong>
+            Vos informations sont traitées de manière confidentielle.
+          </strong>
+
+          Merci de ne transmettre que les informations et documents
+          strictement nécessaires à votre démarche.
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           AVERTISSEMENT
+      ========================== -->
+
+      <div class="notice">
+
+        <span>⚠️</span>
+
+        <div>
+
+          <strong>
+            Remplir ce formulaire ne garantit pas l'obtention d'une aide.
+          </strong>
+
+          L'éligibilité dépend des conditions applicables au dispositif
+          concerné.
+
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           PROGRESSION
+      ========================== -->
+
+      <div
+        class="progress-track"
+        id="progressTrack"
+        aria-label="Progression du formulaire"
+      ></div>
+
+      <p
+        class="progress-caption"
+        id="progressCaption"
+        aria-live="polite"
+      >
+        Étape 1 sur 5
+      </p>
+
+
+      <!-- =========================
+           NETLIFY FORM
+      ========================== -->
+
+      <form
+        name="demande-accompagnement"
+        method="POST"
+        action="/merci.html"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        enctype="multipart/form-data"
+        id="mainForm"
+      >
+
+        <!-- Identification Netlify -->
+        <input
+          type="hidden"
+          name="form-name"
+          value="demande-accompagnement"
+        >
+
+        <!-- Anti-spam Netlify -->
+        <p style="display:none;">
+          <label>
+            Ne pas remplir ce champ :
+            <input
+              name="bot-field"
+              type="text"
+              tabindex="-1"
+              autocomplete="off"
+            >
+          </label>
+        </p>
+
+
+        <!-- ==================================================
+             ÉTAPE 1 — INFORMATIONS PERSONNELLES
+        =================================================== -->
+
+        <section
+          class="block active"
+          data-step="1"
+          aria-hidden="false"
+        >
+
+          <p class="step-label">
+            Étape 1
+          </p>
+
+          <h2>
+            Vos informations personnelles
+          </h2>
+
+
+          <div class="field">
+
+            <label for="nom">
+              Nom<span class="req">*</span>
+            </label>
+
+            <input
+              type="text"
+              id="nom"
+              name="nom"
+              autocomplete="family-name"
+              required
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="prenoms">
+              Prénoms<span class="req">*</span>
+            </label>
+
+            <input
+              type="text"
+              id="prenoms"
+              name="prenoms"
+              autocomplete="given-name"
+              required
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="email">
+              Adresse e-mail<span class="req">*</span>
+            </label>
+
+            <input
+              type="email"
+              id="email"
+              name="email"
+              autocomplete="email"
+              required
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="telephone">
+              Numéro de téléphone<span class="req">*</span>
+            </label>
+
+            <input
+              type="tel"
+              id="telephone"
+              name="telephone"
+              autocomplete="tel"
+              required
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="ville">
+              Ville / Commune de résidence<span class="req">*</span>
+            </label>
+
+            <input
+              type="text"
+              id="ville"
+              name="ville"
+              autocomplete="address-level2"
+              required
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="code_postal">
+              Code postal<span class="req">*</span>
+            </label>
+
+            <input
+              type="text"
+              id="code_postal"
+              name="code_postal"
+              inputmode="numeric"
+              autocomplete="postal-code"
+              required
+            >
+
+          </div>
+
+
+          <p
+            class="error-msg"
+            role="alert"
+          >
+            Merci de compléter tous les champs obligatoires avant de
+            continuer.
+          </p>
+
+
+          <div class="step-nav">
+
+            <button
+              type="button"
+              class="btn-next"
+              data-next
+            >
+              Suivant →
+            </button>
+
+          </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             ÉTAPE 2 — SITUATION
+        =================================================== -->
+
+        <section
+          class="block"
+          data-step="2"
+          aria-hidden="true"
+        >
+
+          <p class="step-label">
+            Étape 2
+          </p>
+
+          <h2>
+            Votre situation
+          </h2>
+
+
+          <div class="field">
+
+            <label>
+              Avez-vous déjà bénéficié d'une aide ou d'une subvention
+              sociale ?<span class="req">*</span>
+            </label>
+
+            <div class="radio-group">
+
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="aide_anterieure"
+                  value="Oui"
+                  required
+                >
+                Oui
+              </label>
+
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="aide_anterieure"
+                  value="Non"
+                >
+                Non
+              </label>
+
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="aide_anterieure"
+                  value="Je ne sais pas"
+                >
+                Je ne sais pas
+              </label>
+
+            </div>
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              Avez-vous déjà effectué une demande de subvention ou d'aide
+              sociale auparavant ?<span class="req">*</span>
+            </label>
+
+            <div class="radio-group">
+
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="demande_anterieure"
+                  value="Oui"
+                  required
+                >
+                Oui
+              </label>
+
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="demande_anterieure"
+                  value="Non"
+                >
+                Non
+              </label>
+
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="demande_anterieure"
+                  value="Je ne sais pas"
+                >
+                Je ne sais pas
+              </label>
+
+            </div>
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              Disposez-vous actuellement d'une carte d'identité nationale
+              ou d'un document d'identité en cours de validité ?<span class="req">*</span>
+            </label>
+
+            <div class="radio-group">
+
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="cni_valide"
+                  value="Oui"
+                  required
+                >
+                Oui
+              </label>
+
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="cni_valide"
+                  value="Non"
+                >
+                Non
+              </label>
+
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="cni_valide"
+                  value="Je ne sais pas"
+                >
+                Je ne sais pas
+              </label>
+
+            </div>
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              Votre carte Vitale est-elle à jour ?<span class="req">*</span>
+            </label>
+
+            <div class="radio-group">
+
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="carte_vitale_ok"
+                  value="Oui"
+                  required
+                >
+                Oui
+              </label>
+
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="carte_vitale_ok"
+                  value="Non"
+                >
+                Non
+              </label>
+
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="carte_vitale_ok"
+                  value="Je ne sais pas"
+                >
+                Je ne sais pas
+              </label>
+
+            </div>
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              Souhaitez-vous être accompagné(e) dans les démarches liées
+              à votre demande ?<span class="req">*</span>
+            </label>
+
+            <div class="radio-group">
+
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="souhaite_accompagnement"
+                  value="Oui, je souhaite être accompagné(e)"
+                  required
+                >
+                Oui, je souhaite être accompagné(e)
+              </label>
+
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="souhaite_accompagnement"
+                  value="Je souhaite d'abord avoir plus d'informations"
+                >
+                Je souhaite d'abord avoir plus d'informations
+              </label>
+
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="souhaite_accompagnement"
+                  value="Non, pas pour le moment"
+                >
+                Non, pas pour le moment
+              </label>
+
+            </div>
+
+          </div>
+
+
+          <p
+            class="error-msg"
+            role="alert"
+          >
+            Merci de compléter tous les champs obligatoires avant de
+            continuer.
+          </p>
+
+
+          <div class="step-nav">
+
+            <button
+              type="button"
+              class="btn-back"
+              data-back
+            >
+              ← Retour
+            </button>
+
+            <button
+              type="button"
+              class="btn-next"
+              data-next
+            >
+              Suivant →
+            </button>
+
+          </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             ÉTAPE 3 — CONTACT
+        =================================================== -->
+
+        <section
+          class="block"
+          data-step="3"
+          aria-hidden="true"
+        >
+
+          <p class="step-label">
+            Étape 3
+          </p>
+
+          <h2>
+            Comment souhaitez-vous être contacté(e) ?
+          </h2>
+
+
+          <div class="field">
+
+            <label>
+              Préférez-vous être contacté(e) par<span class="req">*</span>
+            </label>
+
+            <div class="radio-group">
+
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="canal_contact"
+                  value="WhatsApp"
+                  required
+                >
+                WhatsApp
+              </label>
+
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="canal_contact"
+                  value="E-mail"
+                >
+                E-mail
+              </label>
+
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="canal_contact"
+                  value="Les deux"
+                >
+                Les deux
+              </label>
+
+            </div>
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              Souhaitez-vous être contacté(e) afin d'être accompagné(e)
+              dans les prochaines étapes ?<span class="req">*</span>
+            </label>
+
+            <div class="radio-group">
+
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="contact_prochaines_etapes"
+                  value="Oui"
+                  required
+                >
+                Oui
+              </label>
+
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="contact_prochaines_etapes"
+                  value="Non"
+                >
+                Non
+              </label>
+
+            </div>
+
+          </div>
+
+
+          <p
+            class="error-msg"
+            role="alert"
+          >
+            Merci de compléter tous les champs obligatoires avant de
+            continuer.
+          </p>
+
+
+          <div class="step-nav">
+
+            <button
+              type="button"
+              class="btn-back"
+              data-back
+            >
+              ← Retour
+            </button>
+
+            <button
+              type="button"
+              class="btn-next"
+              data-next
+            >
+              Suivant →
+            </button>
+
+          </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             ÉTAPE 4 — DOCUMENTS
+        =================================================== -->
+
+        <section
+          class="block"
+          data-step="4"
+          aria-hidden="true"
+        >
+
+          <p class="step-label">
+            Étape 4
+          </p>
+
+          <h2>
+            Documents nécessaires à votre demande
+          </h2>
+
+          <p
+            class="hint"
+            style="margin-bottom:20px;"
+          >
+            Assurez-vous que les documents sont lisibles et à jour.
+            Les documents transmis sont utilisés uniquement dans le cadre
+            de votre demande d'accompagnement.
+          </p>
+
+
+          <div class="field">
+
+            <label for="cni_1">
+              Pièce d'identité (face 1)<span class="req">*</span>
+            </label>
+
+            <div class="file-input">
+
+              <span class="flabel">
+                Sélectionnez votre document
+              </span>
+
+              <input
+                type="file"
+                id="cni_1"
+                name="cni_1"
+                accept="image/*,.pdf"
+                required
+              >
+
+            </div>
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="cni_2">
+              Pièce d'identité (face 2)<span class="req">*</span>
+            </label>
+
+            <div class="file-input">
+
+              <span class="flabel">
+                Sélectionnez votre document
+              </span>
+
+              <input
+                type="file"
+                id="cni_2"
+                name="cni_2"
+                accept="image/*,.pdf"
+                required
+              >
+
+            </div>
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="vitale_1">
+              Carte Vitale (face 1)<span class="req">*</span>
+            </label>
+
+            <div class="file-input">
+
+              <span class="flabel">
+                Sélectionnez votre document
+              </span>
+
+              <input
+                type="file"
+                id="vitale_1"
+                name="vitale_1"
+                accept="image/*,.pdf"
+                required
+              >
+
+            </div>
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="vitale_2">
+              Carte Vitale (face 2)<span class="req">*</span>
+            </label>
+
+            <div class="file-input">
+
+              <span class="flabel">
+                Sélectionnez votre document
+              </span>
+
+              <input
+                type="file"
+                id="vitale_2"
+                name="vitale_2"
+                accept="image/*,.pdf"
+                required
+              >
+
+            </div>
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="justif_domicile">
+              Justificatif de domicile<span class="req">*</span>
+            </label>
+
+            <div class="file-input">
+
+              <span class="flabel">
+                Sélectionnez votre document
+              </span>
+
+              <input
+                type="file"
+                id="justif_domicile"
+                name="justif_domicile"
+                accept="image/*,.pdf"
+                required
+              >
+
+            </div>
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="avis_impot">
+              Avis d'impôt<span class="req">*</span>
+            </label>
+
+            <div class="file-input">
+
+              <span class="flabel">
+                Sélectionnez votre document
+              </span>
+
+              <input
+                type="file"
+                id="avis_impot"
+                name="avis_impot"
+                accept="image/*,.pdf"
+                required
+              >
+
+            </div>
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="facture_energie">
+              Facture d'électricité ou d'énergie / gaz<span class="req">*</span>
+            </label>
+
+            <div class="file-input">
+
+              <span class="flabel">
+                Sélectionnez votre document
+              </span>
+
+              <input
+                type="file"
+                id="facture_energie"
+                name="facture_energie"
+                accept="image/*,.pdf"
+                required
+              >
+
+            </div>
+
+          </div>
+
+
+          <p
+            class="error-msg"
+            role="alert"
+          >
+            Merci de sélectionner tous les documents obligatoires avant
+            de continuer.
+          </p>
+
+
+          <div class="step-nav">
+
+            <button
+              type="button"
+              class="btn-back"
+              data-back
+            >
+              ← Retour
+            </button>
+
+            <button
+              type="button"
+              class="btn-next"
+              data-next
+            >
+              Suivant →
+            </button>
+
+          </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             ÉTAPE 5 — FOYER
+        =================================================== -->
+
+        <section
+          class="block"
+          data-step="5"
+          aria-hidden="true"
+        >
+
+          <p class="step-label">
+            Étape 5
+          </p>
+
+          <h2>
+            Votre foyer
+          </h2>
+
+
+          <div class="field">
+
+            <label for="nb_enfants">
+              Nombre d'enfants<span class="req">*</span>
+            </label>
+
+            <input
+              type="number"
+              id="nb_enfants"
+              name="nb_enfants"
+              min="0"
+              step="1"
+              required
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="nb_femmes">
+              Nombre de femmes dans le foyer<span class="req">*</span>
+            </label>
+
+            <input
+              type="number"
+              id="nb_femmes"
+              name="nb_femmes"
+              min="0"
+              step="1"
+              required
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              Salarié(e)<span class="req">*</span>
+            </label>
+
+            <div class="radio-group">
+
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="salarie"
+                  value="Oui"
+                  required
+                >
+                Oui
+              </label>
+
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="salarie"
+                  value="Non"
+                >
+                Non
+              </label>
+
+            </div>
+
+          </div>
+
+
+          <p
+            class="error-msg"
+            role="alert"
+          >
+            Merci de compléter tous les champs obligatoires avant de
+            soumettre votre demande.
+          </p>
+
+
+          <div class="step-nav">
+
+            <button
+              type="button"
+              class="btn-back"
+              data-back
+            >
+              ← Retour
+            </button>
+
+            <button
+              type="submit"
+            >
+              Soumettre ma demande
+            </button>
+
+          </div>
+
+        </section>
+
+      </form>
+
+
+      <!-- =========================
+           FOOTER
+      ========================== -->
+
+      <footer>
+
+        Ce formulaire est un outil d'accompagnement indépendant.
+        Il ne se substitue à aucune démarche officielle auprès d'un
+        organisme public.
+
+      </footer>
+
+    </main>
+
   </div>
-</header>
 
-<div class="wrap">
-  <main>
 
-    <div class="notice confidential">
-      <span>🔒</span>
-      <div>
-        <strong>Vos informations sont traitées de manière confidentielle.</strong>
-        Merci de ne transmettre que les informations et documents strictement nécessaires à votre démarche.
-      </div>
-    </div>
+  <!-- ======================================================
+       JAVASCRIPT
+  ======================================================= -->
 
-    <div class="notice">
-      <span>⚠️</span>
-      <div>
-        <strong>Remplir ce formulaire ne garantit pas l'obtention d'une aide.</strong>
-        L'éligibilité dépend des conditions applicables au dispositif concerné.
-      </div>
-    </div>
+  <script>
 
-    <div class="progress-track" id="progressTrack"></div>
-    <p class="progress-caption" id="progressCaption">Étape 1 sur 5</p>
+    const form = document.getElementById("mainForm");
 
-    <!-- Netlify form: name + hidden input required for detection at build/deploy -->
-    <form name="demande-accompagnement" method="POST" action="/merci.html" data-netlify="true" enctype="multipart/form-data" id="mainForm">
-      <input type="hidden" name="form-name" value="demande-accompagnement">
+    const steps = Array.from(
+      document.querySelectorAll(".block")
+    );
 
-      <!-- 1. Informations personnelles -->
-      <section class="block active" data-step="1">
-        <p class="step-label">Étape 1</p>
-        <h2>Vos informations personnelles</h2>
+    const totalSteps = steps.length;
 
-        <div class="field">
-          <label for="nom">Nom<span class="req">*</span></label>
-          <input type="text" id="nom" name="nom" required>
-        </div>
+    const track = document.getElementById("progressTrack");
 
-        <div class="field">
-          <label for="prenoms">Prénoms<span class="req">*</span></label>
-          <input type="text" id="prenoms" name="prenoms" required>
-        </div>
+    const caption = document.getElementById("progressCaption");
 
-        <div class="field">
-          <label for="email">Adresse e-mail<span class="req">*</span></label>
-          <input type="email" id="email" name="email" required>
-        </div>
+    let current = 1;
 
-        <div class="field">
-          <label for="telephone">Numéro de téléphone<span class="req">*</span></label>
-          <input type="tel" id="telephone" name="telephone" required>
-        </div>
 
-        <div class="field">
-          <label for="ville">Ville / Commune de résidence<span class="req">*</span></label>
-          <input type="text" id="ville" name="ville" required>
-        </div>
+    /* ======================================================
+       CRÉATION DE LA BARRE DE PROGRESSION
+    ======================================================= */
 
-        <div class="field">
-          <label for="code_postal">Code postal<span class="req">*</span></label>
-          <input type="text" id="code_postal" name="code_postal" inputmode="numeric" required>
-        </div>
+    steps.forEach((_, index) => {
 
-        <p class="error-msg">Merci de compléter tous les champs obligatoires avant de continuer.</p>
-        <div class="step-nav">
-          <button type="button" class="btn-next" data-next>Suivant →</button>
-        </div>
-      </section>
+      const segment = document.createElement("div");
 
-      <!-- 2. Votre situation -->
-      <section class="block" data-step="2">
-        <p class="step-label">Étape 2</p>
-        <h2>Votre situation</h2>
+      segment.className = "progress-seg";
 
-        <div class="field">
-          <label>Avez-vous déjà bénéficié d'une aide ou d'une subvention sociale ?<span class="req">*</span></label>
-          <div class="radio-group">
-            <label class="radio-option"><input type="radio" name="aide_anterieure" value="Oui" required> Oui</label>
-            <label class="radio-option"><input type="radio" name="aide_anterieure" value="Non"> Non</label>
-            <label class="radio-option"><input type="radio" name="aide_anterieure" value="Je ne sais pas"> Je ne sais pas</label>
-          </div>
-        </div>
+      segment.dataset.seg = index + 1;
 
-        <div class="field">
-          <label>Avez-vous déjà effectué une demande de subvention ou d'aide sociale auparavant ?<span class="req">*</span></label>
-          <div class="radio-group">
-            <label class="radio-option"><input type="radio" name="demande_anterieure" value="Oui" required> Oui</label>
-            <label class="radio-option"><input type="radio" name="demande_anterieure" value="Non"> Non</label>
-            <label class="radio-option"><input type="radio" name="demande_anterieure" value="Je ne sais pas"> Je ne sais pas</label>
-          </div>
-        </div>
 
-        <div class="field">
-          <label>Disposez-vous actuellement d'une carte d'identité nationale ou d'un document d'identité en cours de validité ?<span class="req">*</span></label>
-          <div class="radio-group">
-            <label class="radio-option"><input type="radio" name="cni_valide" value="Oui" required> Oui</label>
-            <label class="radio-option"><input type="radio" name="cni_valide" value="Non"> Non</label>
-            <label class="radio-option"><input type="radio" name="cni_valide" value="Je ne sais pas"> Je ne sais pas</label>
-          </div>
-        </div>
+      const fill = document.createElement("div");
 
-        <div class="field">
-          <label>Votre carte Vitale est-elle à jour ?<span class="req">*</span></label>
-          <div class="radio-group">
-            <label class="radio-option"><input type="radio" name="carte_vitale_ok" value="Oui" required> Oui</label>
-            <label class="radio-option"><input type="radio" name="carte_vitale_ok" value="Non"> Non</label>
-            <label class="radio-option"><input type="radio" name="carte_vitale_ok" value="Je ne sais pas"> Je ne sais pas</label>
-          </div>
-        </div>
+      fill.className = "fill";
 
-        <div class="field">
-          <label>Souhaitez-vous être accompagné(e) dans les démarches liées à votre demande ?<span class="req">*</span></label>
-          <div class="radio-group">
-            <label class="radio-option"><input type="radio" name="souhaite_accompagnement" value="Oui, je souhaite être accompagné(e)" required> Oui, je souhaite être accompagné(e)</label>
-            <label class="radio-option"><input type="radio" name="souhaite_accompagnement" value="Je souhaite d'abord avoir plus d'informations"> Je souhaite d'abord avoir plus d'informations</label>
-            <label class="radio-option"><input type="radio" name="souhaite_accompagnement" value="Non, pas pour le moment"> Non, pas pour le moment</label>
-          </div>
-        </div>
+      segment.appendChild(fill);
 
-        <p class="error-msg">Merci de compléter tous les champs obligatoires avant de continuer.</p>
-        <div class="step-nav">
-          <button type="button" class="btn-back" data-back>← Retour</button>
-          <button type="button" class="btn-next" data-next>Suivant →</button>
-        </div>
-      </section>
+      track.appendChild(segment);
 
-      <!-- 3. Contact -->
-      <section class="block" data-step="3">
-        <p class="step-label">Étape 3</p>
-        <h2>Comment souhaitez-vous être contacté(e) ?</h2>
-
-        <div class="field">
-          <label>Préférez-vous être contacté(e) par<span class="req">*</span></label>
-          <div class="radio-group">
-            <label class="radio-option"><input type="radio" name="canal_contact" value="WhatsApp" required> WhatsApp</label>
-            <label class="radio-option"><input type="radio" name="canal_contact" value="E-mail"> E-mail</label>
-            <label class="radio-option"><input type="radio" name="canal_contact" value="Les deux"> Les deux</label>
-          </div>
-        </div>
-
-        <div class="field">
-          <label>Souhaitez-vous être contacté(e) afin d'être accompagné(e) dans les prochaines étapes ?<span class="req">*</span></label>
-          <div class="radio-group">
-            <label class="radio-option"><input type="radio" name="contact_prochaines_etapes" value="Oui" required> Oui</label>
-            <label class="radio-option"><input type="radio" name="contact_prochaines_etapes" value="Non"> Non</label>
-          </div>
-        </div>
-
-        <p class="error-msg">Merci de compléter tous les champs obligatoires avant de continuer.</p>
-        <div class="step-nav">
-          <button type="button" class="btn-back" data-back>← Retour</button>
-          <button type="button" class="btn-next" data-next>Suivant →</button>
-        </div>
-      </section>
-
-      <!-- 4. Documents -->
-      <section class="block" data-step="4">
-        <p class="step-label">Étape 4</p>
-        <h2>Documents nécessaires à votre demande</h2>
-        <p class="hint" style="margin-bottom:20px;">Assurez-vous que les documents sont lisibles et à jour. Les documents transmis sont utilisés uniquement dans le cadre de votre demande d'accompagnement.</p>
-
-        <div class="field">
-          <label for="cni_1">Pièce d'identité (face 1)<span class="req">*</span></label>
-          <div class="file-input">
-            <input type="file" id="cni_1" name="cni_1" accept="image/*,.pdf" required>
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="cni_2">Pièce d'identité (face 2)<span class="req">*</span></label>
-          <div class="file-input">
-            <input type="file" id="cni_2" name="cni_2" accept="image/*,.pdf" required>
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="vitale_1">Carte Vitale (face 1)<span class="req">*</span></label>
-          <div class="file-input">
-            <input type="file" id="vitale_1" name="vitale_1" accept="image/*,.pdf" required>
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="vitale_2">Carte Vitale (face 2)<span class="req">*</span></label>
-          <div class="file-input">
-            <input type="file" id="vitale_2" name="vitale_2" accept="image/*,.pdf" required>
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="justif_domicile">Justificatif de domicile<span class="req">*</span></label>
-          <div class="file-input">
-            <input type="file" id="justif_domicile" name="justif_domicile" accept="image/*,.pdf" required>
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="avis_impot">Avis d'impôt<span class="req">*</span></label>
-          <div class="file-input">
-            <input type="file" id="avis_impot" name="avis_impot" accept="image/*,.pdf" required>
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="facture_energie">Facture d'électricité ou d'énergie / gaz<span class="req">*</span></label>
-          <div class="file-input">
-            <input type="file" id="facture_energie" name="facture_energie" accept="image/*,.pdf" required>
-          </div>
-        </div>
-
-        <p class="error-msg">Merci de compléter tous les champs obligatoires avant de continuer.</p>
-        <div class="step-nav">
-          <button type="button" class="btn-back" data-back>← Retour</button>
-          <button type="button" class="btn-next" data-next>Suivant →</button>
-        </div>
-      </section>
-
-      <!-- 5. Foyer -->
-      <section class="block" data-step="5">
-        <p class="step-label">Étape 5</p>
-        <h2>Votre foyer</h2>
-
-        <div class="field">
-          <label for="nb_enfants">Nombre d'enfants<span class="req">*</span></label>
-          <input type="number" id="nb_enfants" name="nb_enfants" min="0" required>
-        </div>
-
-        <div class="field">
-          <label for="nb_femmes">Nombre de femmes dans le foyer<span class="req">*</span></label>
-          <input type="number" id="nb_femmes" name="nb_femmes" min="0" required>
-        </div>
-
-        <div class="field">
-          <label>Salarié(e)<span class="req">*</span></label>
-          <div class="radio-group">
-            <label class="radio-option"><input type="radio" name="salarie" value="Oui" required> Oui</label>
-            <label class="radio-option"><input type="radio" name="salarie" value="Non"> Non</label>
-          </div>
-        </div>
-
-        <p class="error-msg">Merci de compléter tous les champs obligatoires avant de continuer.</p>
-        <div class="step-nav">
-          <button type="button" class="btn-back" data-back>← Retour</button>
-          <button type="submit">Soumettre ma demande</button>
-        </div>
-      </section>
-
-    </form>
-
-    <footer>
-      Ce formulaire est un outil d'accompagnement indépendant. Il ne se substitue à aucune démarche officielle auprès d'un organisme public.
-    </footer>
-
-  </main>
-</div>
-
-<script>
-  const steps = Array.from(document.querySelectorAll('.block'));
-  const totalSteps = steps.length;
-  const track = document.getElementById('progressTrack');
-  const caption = document.getElementById('progressCaption');
-  let current = 1;
-
-  // build progress segments
-  steps.forEach((_, i) => {
-    const seg = document.createElement('div');
-    seg.className = 'progress-seg';
-    seg.dataset.seg = i + 1;
-    const fill = document.createElement('div');
-    fill.className = 'fill';
-    seg.appendChild(fill);
-    track.appendChild(seg);
-  });
-
-  function updateProgress() {
-    const segs = track.querySelectorAll('.progress-seg');
-    segs.forEach(seg => {
-      const n = parseInt(seg.dataset.seg, 10);
-      seg.classList.toggle('done', n < current);
-      seg.classList.toggle('active', n === current);
-      if (n > current) seg.querySelector('.fill').style.width = '0%';
     });
-    caption.textContent = `Étape ${current} sur ${totalSteps}`;
-  }
 
-  function showStep(n) {
-    steps.forEach(s => s.classList.toggle('active', parseInt(s.dataset.step, 10) === n));
-    current = n;
+
+    /* ======================================================
+       MISE À JOUR DE LA PROGRESSION
+    ======================================================= */
+
+    function updateProgress() {
+
+      const segments =
+        track.querySelectorAll(".progress-seg");
+
+
+      segments.forEach(segment => {
+
+        const number =
+          parseInt(segment.dataset.seg, 10);
+
+
+        segment.classList.toggle(
+          "done",
+          number < current
+        );
+
+
+        segment.classList.toggle(
+          "active",
+          number === current
+        );
+
+
+        const fill =
+          segment.querySelector(".fill");
+
+
+        if (number > current) {
+          fill.style.width = "0%";
+        }
+
+      });
+
+
+      caption.textContent =
+        `Étape ${current} sur ${totalSteps}`;
+
+    }
+
+
+    /* ======================================================
+       AFFICHER UNE ÉTAPE
+    ======================================================= */
+
+    function showStep(number) {
+
+      if (number < 1 || number > totalSteps) {
+        return;
+      }
+
+
+      steps.forEach(step => {
+
+        const stepNumber =
+          parseInt(step.dataset.step, 10);
+
+        const isActive =
+          stepNumber === number;
+
+
+        step.classList.toggle(
+          "active",
+          isActive
+        );
+
+
+        step.setAttribute(
+          "aria-hidden",
+          String(!isActive)
+        );
+
+      });
+
+
+      current = number;
+
+      updateProgress();
+
+
+      window.scrollTo({
+        top: document.querySelector("main").offsetTop - 20,
+        behavior: "smooth"
+      });
+
+    }
+
+
+    /* ======================================================
+       VALIDATION D'UNE ÉTAPE
+    ======================================================= */
+
+    function validateStep(section) {
+
+      let valid = true;
+
+      const requiredInputs =
+        section.querySelectorAll(
+          "input[required], select[required]"
+        );
+
+
+      /* Validation des champs classiques */
+
+      requiredInputs.forEach(input => {
+
+        if (
+          input.type !== "radio" &&
+          input.type !== "file"
+        ) {
+
+          if (
+            !input.value.trim() ||
+            !input.checkValidity()
+          ) {
+
+            valid = false;
+
+          }
+
+        }
+
+      });
+
+
+      /* Validation des fichiers */
+
+      const fileInputs =
+        section.querySelectorAll(
+          'input[type="file"][required]'
+        );
+
+
+      fileInputs.forEach(input => {
+
+        if (
+          !input.files ||
+          input.files.length === 0
+        ) {
+
+          valid = false;
+
+        }
+
+      });
+
+
+      /* Validation des groupes radio */
+
+      const radioInputs =
+        section.querySelectorAll(
+          'input[type="radio"][required]'
+        );
+
+
+      const radioNames = [
+        ...new Set(
+          Array.from(radioInputs)
+            .map(input => input.name)
+        )
+      ];
+
+
+      radioNames.forEach(name => {
+
+        const checked =
+          section.querySelector(
+            `input[name="${CSS.escape(name)}"]:checked`
+          );
+
+
+        if (!checked) {
+          valid = false;
+        }
+
+      });
+
+
+      return valid;
+
+    }
+
+
+    /* ======================================================
+       AFFICHAGE D'UNE ERREUR
+    ======================================================= */
+
+    function showValidationError(section) {
+
+      const error =
+        section.querySelector(".error-msg");
+
+
+      if (error) {
+
+        error.classList.add("show");
+
+      }
+
+
+      const firstInvalid =
+        section.querySelector(
+          "input:invalid, select:invalid"
+        );
+
+
+      if (firstInvalid) {
+
+        firstInvalid.focus();
+
+      }
+
+    }
+
+
+    /* ======================================================
+       BOUTONS "SUIVANT"
+    ======================================================= */
+
+    document
+      .querySelectorAll("[data-next]")
+      .forEach(button => {
+
+        button.addEventListener("click", () => {
+
+          const section =
+            button.closest(".block");
+
+
+          const error =
+            section.querySelector(".error-msg");
+
+
+          if (validateStep(section)) {
+
+            if (error) {
+              error.classList.remove("show");
+            }
+
+
+            showStep(current + 1);
+
+          } else {
+
+            showValidationError(section);
+
+          }
+
+        });
+
+      });
+
+
+    /* ======================================================
+       BOUTONS "RETOUR"
+    ======================================================= */
+
+    document
+      .querySelectorAll("[data-back]")
+      .forEach(button => {
+
+        button.addEventListener("click", () => {
+
+          const currentSection =
+            document.querySelector(
+              `.block[data-step="${current}"]`
+            );
+
+
+          if (currentSection) {
+
+            const error =
+              currentSection.querySelector(".error-msg");
+
+
+            if (error) {
+              error.classList.remove("show");
+            }
+
+          }
+
+
+          showStep(current - 1);
+
+        });
+
+      });
+
+
+    /* ======================================================
+       MASQUER L'ERREUR LORSQU'ON MODIFIE UN CHAMP
+    ======================================================= */
+
+    form
+      .querySelectorAll("input, select")
+      .forEach(input => {
+
+        input.addEventListener("input", () => {
+
+          const section =
+            input.closest(".block");
+
+
+          if (section) {
+
+            const error =
+              section.querySelector(".error-msg");
+
+
+            if (
+              error &&
+              validateStep(section)
+            ) {
+
+              error.classList.remove("show");
+
+            }
+
+          }
+
+        });
+
+
+        input.addEventListener("change", () => {
+
+          const section =
+            input.closest(".block");
+
+
+          if (section) {
+
+            const error =
+              section.querySelector(".error-msg");
+
+
+            if (
+              error &&
+              validateStep(section)
+            ) {
+
+              error.classList.remove("show");
+
+            }
+
+          }
+
+        });
+
+      });
+
+
+    /* ======================================================
+       VALIDATION FINALE AVANT ENVOI
+    ======================================================= */
+
+    form.addEventListener("submit", event => {
+
+      const lastStep =
+        document.querySelector(
+          `.block[data-step="${totalSteps}"]`
+        );
+
+
+      if (!validateStep(lastStep)) {
+
+        event.preventDefault();
+
+        showValidationError(lastStep);
+
+        return;
+
+      }
+
+      /*
+        IMPORTANT :
+        Aucun preventDefault() ici lorsque tout est valide.
+
+        Le navigateur laisse donc Netlify recevoir
+        normalement le formulaire et redirige ensuite
+        vers /merci.html grâce à action="/merci.html".
+      */
+
+    });
+
+
+    /* ======================================================
+       INITIALISATION
+    ======================================================= */
+
     updateProgress();
-    window.scrollTo({ top: document.querySelector('.progress-track').offsetTop - 20, behavior: 'smooth' });
-  }
 
-  function validateStep(section) {
-    const inputs = section.querySelectorAll('input[required]');
-    const groups = {};
-    let valid = true;
+    showStep(1);
 
-    inputs.forEach(input => {
-      if (input.type === 'radio') {
-        groups[input.name] = groups[input.name] || section.querySelectorAll(`input[name="${input.name}"]`);
-      } else if (!input.checkValidity() || !input.value) {
-        valid = false;
-      } else if (input.type === 'file' && input.files.length === 0) {
-        valid = false;
-      }
-    });
-
-    Object.keys(groups).forEach(name => {
-      const checked = section.querySelector(`input[name="${name}"]:checked`);
-      if (!checked) valid = false;
-    });
-
-    return valid;
-  }
-
-  document.querySelectorAll('[data-next]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const section = btn.closest('.block');
-      const errorMsg = section.querySelector('.error-msg');
-      if (validateStep(section)) {
-        errorMsg.classList.remove('show');
-        showStep(current + 1);
-      } else {
-        errorMsg.classList.add('show');
-        section.reportValidity ? section.querySelectorAll('input')[0] : null;
-        const firstInvalid = section.querySelector('input:invalid, input[required]:not(:checked)');
-      }
-    });
-  });
-
-  document.querySelectorAll('[data-back]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      showStep(current - 1);
-    });
-  });
-
-  updateProgress();
-
-
-</script>
+  </script>
 
 </body>
 </html>
