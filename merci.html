@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Demande envoyée — Merci</title>
+
+  <style>
+    :root {
+      --ink: #1f2b24;
+      --ink-soft: #4a5750;
+      --paper: #f7f6f1;
+      --card: #ffffff;
+      --sage: #3c5a48;
+      --sage-deep: #2a4234;
+      --line: #d9d5c9;
+      --radius: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Iowan Old Style",
+                   "Palatino Linotype",
+                   Georgia,
+                   serif;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 620px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 48px 36px;
+      text-align: center;
+
+      box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.06),
+        0 12px 32px rgba(30, 40, 30, 0.08);
+    }
+
+    .icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 24px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 50%;
+
+      background: #eef2ea;
+      color: var(--sage);
+
+      font-family: Arial, sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      font-size: 12px;
+      font-weight: 700;
+
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+
+      color: var(--sage);
+    }
+
+    h1 {
+      margin: 0 0 18px;
+
+      font-size: clamp(28px, 6vw, 38px);
+      line-height: 1.15;
+      font-weight: 600;
+    }
+
+    .intro {
+      max-width: 500px;
+      margin: 0 auto 26px;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      font-size: 16px;
+      line-height: 1.65;
+
+      color: var(--ink-soft);
+    }
+
+    .notice {
+      margin: 28px 0;
+
+      padding: 18px;
+
+      border: 1px solid #c8d4c0;
+      border-radius: 8px;
+
+      background: #eef2ea;
+
+      text-align: left;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      font-size: 14px;
+      line-height: 1.55;
+
+      color: var(--sage-deep);
+    }
+
+    .notice strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .button {
+      display: inline-block;
+
+      padding: 14px 24px;
+
+      border-radius: 8px;
+
+      background: var(--sage-deep);
+      color: #ffffff;
+
+      text-decoration: none;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      font-size: 15px;
+      font-weight: 600;
+
+      transition:
+        background 0.15s ease,
+        transform 0.1s ease;
+    }
+
+    .button:hover {
+      background: var(--sage);
+    }
+
+    .button:active {
+      transform: translateY(1px);
+    }
+
+    footer {
+      margin-top: 28px;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      font-size: 12px;
+      line-height: 1.5;
+
+      color: var(--ink-soft);
+    }
+
+    @media (max-width: 480px) {
+
+      body {
+        padding: 14px;
+      }
+
+      .card {
+        padding: 38px 22px;
+      }
+
+      .icon {
+        width: 64px;
+        height: 64px;
+        font-size: 32px;
+      }
+
+      .intro {
+        font-size: 15px;
+      }
+
+      .notice {
+        font-size: 13.5px;
+      }
+
+      .button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <main class="card">
+
+      <div class="icon" aria-hidden="true">
+        ✓
+      </div>
+
+      <p class="eyebrow">
+        Demande d'accompagnement
+      </p>
+
+      <h1>
+        Votre demande a bien été envoyée
+      </h1>
+
+      <p class="intro">
+        Merci d'avoir pris le temps de compléter le formulaire.
+        Votre demande a été transmise avec succès.
+      </p>
+
+      <div class="notice">
+
+        <strong>
+          Que se passe-t-il maintenant ?
+        </strong>
+
+        Votre demande va être examinée.
+        Si des informations complémentaires sont nécessaires,
+        vous pourrez être contacté(e) par le moyen de communication
+        que vous avez indiqué dans le formulaire.
+
+      </div>
+
+      <a
+        href="/"
+        class="button"
+      >
+        Retour à l'accueil
+      </a>
+
+      <footer>
+        Ce formulaire est un outil d'accompagnement indépendant.
+        Il ne se substitue à aucune démarche officielle auprès
+        d'un organisme public.
+      </footer>
+
+    </main>
+
+  </div>
+
+</body>
+</html>
